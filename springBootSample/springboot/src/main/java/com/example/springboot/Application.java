@@ -1,13 +1,18 @@
 package com.example.springboot;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.ServletRegistration;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.support.XmlWebApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
 
 @SpringBootApplication
 public class Application {
@@ -35,6 +40,7 @@ public class Application {
 
 		};
 	}
+	
 	
 	public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
