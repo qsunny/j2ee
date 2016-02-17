@@ -5,4 +5,5 @@ SPI 简介
 	而后，把新加的实现，描述给JDK知道就行啦（通过改一个文本文件即可） 公司内部，目前Dubbo框架就基于SPI机制提供扩展功能。
 	
 	参考: http://ivanzhangwb.github.io/blog/2012/06/01/java-spi/
+		  http://renchx.com/java-spi-serviceloader/?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io
 	
