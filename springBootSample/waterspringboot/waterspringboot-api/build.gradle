@@ -32,13 +32,13 @@ publishing {
         maven {
             // change to point to your repo, e.g. http://my.org/repo
             if(version.endsWith('-SNAPSHOT')) {
-                url "http://192.168.1.112:8081/nexus/content/repositories/cecport-snapshots/"
+                url "http://192.168.1.112:8081/nexus/content/repositories/port-snapshots/"
             } else {
-                url "http://192.168.1.112:8081/nexus/content/repositories/cecport-release/"
+                url "http://192.168.1.112:8081/nexus/content/repositories/port-release/"
             }
 			credentials {
-				username = 'cecport'
-				password = 'cecport123'
+				username = 'port'
+				password = 'port123'
 			}
         }
     }
@@ -57,7 +57,7 @@ publishing {
             }
             */
             
-			groupId "com.cecport"
+			groupId "com.port"
 			artifactId	"water-api"
 			version 	"$version" 
         }       
