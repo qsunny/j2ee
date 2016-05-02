@@ -1,0 +1,6 @@
+include 'waterspringboot-api'
+include 'waterspringboot-core'
+include 'waterspringboot-front'
+
+
+rootProject.name = 'waterspringboot'
