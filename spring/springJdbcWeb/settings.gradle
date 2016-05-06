@@ -1,0 +1,2 @@
+
+include "springJdbcWeb-api", "springJdbcWeb-core", "springJdbcWeb-webapp"
