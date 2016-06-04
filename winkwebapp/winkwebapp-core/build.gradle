@@ -1,0 +1,38 @@
+
+dependencies {
+	compile project(':winkwebapp-api')
+	compile 'log4j:log4j:1.2.8'
+	compile 'org.slf4j:slf4j-log4j12:1.7.13'
+	compile 'org.slf4j:slf4j-api:1.7.13'	
+	compile "org.apache.wink:wink-server:${winkVersion}"
+	compile "org.apache.wink:wink-client:${winkVersion}"
+	compile "org.apache.wink:wink-json4j:${winkVersion}"
+	compile "org.apache.wink:wink-json-provider:${winkVersion}"
+	compile "org.apache.wink:wink-jackson-provider:${winkVersion}"
+	compile "org.apache.wink:wink-protobuf-provider:${winkVersion}"
+	compile "org.apache.wink:wink-thrift-provider:${winkVersion}"
+	compile "org.apache.wink:wink-jettison-provider:${winkVersion}"
+	compile "org.apache.wink:wink-webdav:${winkVersion}"
+	compile "org.apache.wink:wink-spring-support:+"
+	compile "org.sonatype.spice:wink-client-asynchttpclient:1.0"
+	compile "org.apache.wink:wink-client-apache-httpclient:${winkVersion}"	
+	compile "org.springframework:spring-context-support:$springVersion"
+	compile "org.springframework:spring-webmvc:$springVersion"
+	compile "org.springframework:spring-test:$springVersion"
+	compile "org.springframework:spring-jdbc:$springVersion"
+	compile "org.springframework:spring-tx:$springVersion"
+	compile "org.springframework:spring-orm:$springVersion"
+	compile 'org.apache.httpcomponents:httpclient:4.5.1'
+	compile "commons-cli:commons-cli:1.2"
+	compile 'com.alibaba:druid:1.0.16'
+	compile 'mysql:mysql-connector-java:5.1.38'
+	compile 'cglib:cglib:3.2.0'
+	/*
+	compile 'com.fasterxml.jackson.core:jackson-core:2.7.4'
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.7.4'
+	compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.7.4'
+	compile 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.7.4'
+	compile group: 'org.jsoup', name: 'jsoup', version: '1.9.2'
+	compile group: 'com.hubspot.jackson', name: 'jackson-jaxrs-propertyfiltering', version: '0.7.2'
+	*/
+}

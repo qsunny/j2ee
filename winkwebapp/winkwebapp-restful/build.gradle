@@ -1,0 +1,7 @@
+apply plugin: 'war'
+
+dependencies {
+	compile project(':winkwebapp-core')
+	compile	'javax.servlet:jstl:1.2'
+    compile "javax.servlet:javax.servlet-api:3.1.0"
+}
