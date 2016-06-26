@@ -6,7 +6,7 @@ dependencies {
 }
 
 task apiJar(type: Jar) {
-    baseName "water-api"
+    baseName "search-api"
     version  "$version"
     
     from sourceSets.main.output
