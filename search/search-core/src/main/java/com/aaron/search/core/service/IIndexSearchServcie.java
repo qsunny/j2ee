@@ -16,6 +16,7 @@ import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.RangeQueryBuilder;
+import org.elasticsearch.search.sort.SortBuilder;
 
 import com.aaron.search.bean.IndexMeta;
 import com.aaron.search.exception.SearchException;
@@ -44,6 +45,20 @@ public interface IIndexSearchServcie {
 	 * @return
 	 */
 	public SearchResponse indexSearch(String[] indexs,String[] types,QueryBuilder queryBuilder,RangeQueryBuilder rangeQueryBuilder,int size);
+	
+	/**
+	 * 滚动查询
+	 * @param indexs
+	 * @param types
+	 * @param queryBuilder
+	 * @param rangeQueryBuilder
+	 * @param size
+	 * @return
+	 */
+	public SearchResponse indexScrollSearch(String[] indexs,String[] types,QueryBuilder queryBuilder,
+			RangeQueryBuilder rangeQueryBuilder,int size,SortBuilder sortBuilder);
+	
+	public long indexCount(String[] indexs,String[] types,QueryBuilder queryBuilder);
 	
 	/**
 	 * 删除索引
@@ -108,4 +123,6 @@ public interface IIndexSearchServcie {
 	 * @return
 	 */
 	public BulkProcessor indexBulkProcessor(List<ReplicationRequest<?>> requestList);
+	
+
 }

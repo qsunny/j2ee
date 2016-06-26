@@ -9,6 +9,7 @@ import org.elasticsearch.action.bulk.BulkProcessor;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
+import org.elasticsearch.action.count.CountResponse;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.get.MultiGetRequestBuilder;
@@ -25,8 +26,9 @@ import org.elasticsearch.common.unit.ByteSizeValue;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.sort.SortBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -234,11 +236,48 @@ public class IndexSearchServiceImpl implements IIndexSearchServcie {
 		return elasticSearchClientService.getEsClient().prepareSearch(indexs)
 		.setTypes(types)
 		.setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-		.setQuery(queryBuilder) // Query
+		.setQuery(queryBuilder) // Query		
 		.setPostFilter(rangeQueryBuilder)     // Filter QueryBuilders.rangeQuery("age").from(12).to(18)
 		.setFrom(0).setSize(size).setExplain(true)
         .execute()
         .actionGet();
+	}
+	
+	@Override
+	public SearchResponse indexScrollSearch(String[] indexs, String[] types, QueryBuilder queryBuilder,
+			RangeQueryBuilder rangeQueryBuilder, int size,SortBuilder sortBuilder) {
+		SearchResponse scrollResp = elasticSearchClientService.getEsClient().prepareSearch(indexs)
+				.setTypes(types)
+				.addSort(sortBuilder)
+		        .setScroll(new TimeValue(60000)) //设置滚动超时时间
+		        .setQuery(queryBuilder)
+		        .setSize(size).execute().actionGet(); //100 hits per shard will be returned for each scroll
+		
+		//Scroll until no hits are returned
+		while (true) {
+
+		    for (SearchHit hit : scrollResp.getHits().getHits()) {
+		        System.out.println(hit.getSourceAsString());
+		    }
+		    scrollResp = elasticSearchClientService.getEsClient().prepareSearchScroll(scrollResp.getScrollId()).setScroll(new TimeValue(60000)).execute().actionGet();
+		    //Break condition: No hits are returned
+		    if (scrollResp.getHits().getHits().length == 0) {
+		        break;
+		    }
+		}
+		
+		return scrollResp;
+	}
+	
+	@Override
+	public long indexCount(String[] indces, String[] types, QueryBuilder queryBuilder) {
+		SearchResponse response = elasticSearchClientService.getEsClient().prepareSearch(indces)
+				.setTypes(types)
+		        .setQuery(queryBuilder)
+		        .execute()
+		        .actionGet();
+		
+		return response.getHits().getTotalHits();
 	}
 
 }

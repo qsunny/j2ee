@@ -21,10 +21,11 @@ public class ElasticSearchClientServiceImpl implements IElasticSearchClientServi
 //		Settings settings = Settings.settingsBuilder()
 //		        .put("cluster.name", "myClusterName").build();
 //		Client client = TransportClient.builder().settings(settings).build();
-		
-		client = TransportClient.builder().build()
-		        //.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("host1"), 9300))
-		        .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("192.168.1.103"), 9300));
+		if(null==client) {
+			client = TransportClient.builder().build()
+			        //.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("host1"), 9300))
+			        .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("192.168.1.103"), 9300));
+		}
 	}
 
 	@Override

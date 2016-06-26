@@ -23,11 +23,16 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.support.replication.ReplicationRequest;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.Client;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.RangeQueryBuilder;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.sort.SortBuilder;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -348,9 +353,11 @@ public class TestEsIndex {
 		String[] indexs = new String[]{"bank"};
 		String[] types = new String[]{"account"};
 		
-		QueryBuilder queryBuilder = QueryBuilders.commonTermsQuery("firstname","Virginia");
+		QueryBuilder ctq = QueryBuilders.commonTermsQuery("firstname","Virginia");
+		//termQuery 只能查询匹配到小写
+		QueryBuilder tq = QueryBuilders.termQuery("firstname", "virginia");
 		QueryBuilder maq = QueryBuilders.matchAllQuery();
-		QueryBuilder wcq = QueryBuilders.wildcardQuery("firstname", "B*");
+		QueryBuilder wcq = QueryBuilders.wildcardQuery("firstname", "b*");
 		QueryBuilder regq = QueryBuilders.regexpQuery("firstname","s.*y");  
 		
 		QueryBuilder fuq = QueryBuilders.fuzzyQuery("firstname", "ri");
@@ -360,17 +367,36 @@ public class TestEsIndex {
 		QueryBuilder smtqb = QueryBuilders.spanMultiTermQueryBuilder(
 				QueryBuilders.prefixQuery("firstname", "nie")                   
 			);
-		SearchResponse response = indexSearchServcie.indexSearch(indexs, types, smtqb, rangeQueryBuilder, 30);
+		SearchResponse response = indexSearchServcie.indexSearch(indexs, types, wcq, rangeQueryBuilder, 30);
 		
 		response.getHits().forEach(hit -> {
-			
+			System.out.println(hit.getSourceAsString());
 			hit.getSource().forEach((key,value)->{
 				System.out.println("====" +key + "======>" + value);
 			});
 		});
 	}
 	
+	@Test
+	public void testScrollSearch() {
+		String[] indexs = new String[]{"bank","atm"};
+		String[] types = new String[]{"account","blog"};
+		//termQuery 只能查询匹配到小写
+		QueryBuilder tq = QueryBuilders.termQuery("firstname", "virginia");
+		RangeQueryBuilder rangeQueryBuilder = QueryBuilders.rangeQuery("age").from(12).to(45);
+		SortBuilder sortBuilder = SortBuilders.fieldSort("age").order(SortOrder.ASC);
+		
+		SearchResponse scrollResp = indexSearchServcie.indexScrollSearch(indexs, types, null, null, 5, sortBuilder);
+		
+	}
 	
+	@Test
+	public void testCountIndex() {
+		String[] indexs = new String[]{"bank","atm"};
+		String[] types = new String[]{"account","blog"};
+		long count = indexSearchServcie.indexCount(indexs, types, null);
+		System.out.println(count);
+	}
 	
  
 }
