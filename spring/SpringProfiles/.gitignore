@@ -5,4 +5,4 @@ build
 .project
 .classpath
 .idea
-.target
+target
