@@ -43,10 +43,24 @@ allprojects {
         jcenter()
         mavenCentral()
     }
+
+    /**
+    //排除其中一些包测试
+    test {
+        //忽略测试失败
+        ignoreFailures = true
+        //package level regEx
+        exclude 'com/aaron/junitspring/**'
+        //class level regEx
+    }
+    */
+
 }
 
 dependencies {
 
+    compile group: 'org.springframework.data', name: 'spring-data-mongodb', version: '1.9.2.RELEASE'
+    compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.3.0'
     compile 'org.springframework:spring-context:4.3.0.RELEASE'
     testCompile 'org.springframework:spring-test:4.3.0.RELEASE'
 
