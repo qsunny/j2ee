@@ -1,0 +1,15 @@
+apply plugin: 'war'
+//apply plugin: "org.akhikhl.gretty"
+//apply plugin: 'org.hidetake.ssh'
+
+ext {
+    group 'com.aaron'
+    version '1.0-SNAPSHOT'
+}
+
+dependencies {
+    //classpath "org.akhikhl.gretty:gretty:1.4.0"
+
+    compile project(':zookeeper-core')
+
+}

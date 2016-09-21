@@ -1,0 +1,60 @@
+allprojects {
+    apply plugin: 'java'
+
+    // JDK 8
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    // 全局属性设置
+    ext {
+        // java文件编码方式设置为utf-8
+        compileJava.options.encoding = 'UTF-8'
+        compileTestJava.options.encoding = 'UTF-8'
+        javadoc.options.encoding = 'utf-8'
+
+    }
+
+    repositories {
+        //使用Maven本地缓存
+        mavenLocal()
+        maven {
+            credentials {
+                username 'user'
+                password 'password'
+            }
+            url "http://192.168.1.112:8081/nexus/content/groups/public/"
+        }
+        maven {
+            url "http://repo1.maven.org/maven2"
+        }
+        maven {
+            url "https://repo.spring.io/libs-release"
+        }
+        maven { url 'http://repo.spring.io/snapshot' }
+        //使用开源中国的maven库
+        maven {
+            url "http://maven.oschina.net/content/groups/public/"
+            name = "开源中国的maven库"
+        }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        jcenter()
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'eclipse-wtp'
+    apply plugin: 'idea'
+
+    dependencies {
+        testCompile 'junit:junit:4.12'
+    }
+
+    version '1.0.0-SNAPSHOT'
+
+    jar {
+        manifest.attributes provider: 'zookeeper app'
+    }
+}
