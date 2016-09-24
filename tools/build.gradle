@@ -1,8 +1,8 @@
-//apply plugin: 'eclipse-wtp'
+apply plugin: 'eclipse-wtp'
 apply plugin: 'idea'
 apply plugin: 'maven-publish'
 
-version = '1.0.0-RELEASE'
+version = '1.0.0.RELEASE'
 jar {
     manifest {
         attributes 'Implementation-Title': 'tools',
@@ -85,14 +85,16 @@ publishing {
 	repositories {
         maven {
             // change to point to your repo, e.g. http://my.org/repo
-            if(version.endsWith('-SNAPSHOT')) {
-                url "http://192.168.1.112:8081/nexus/content/repositories/aaron-snapshots/"
+            if(version.endsWith('.SNAPSHOT')) {
+                //url "http://192.168.1.112:8081/nexus/content/repositories/aaron-snapshots/"
+				url "http://192.168.1.112:8081/nexus/content/repositories/snapshots/"
             } else {
-                url "http://192.168.1.112:8081/nexus/content/repositories/aaron-release/"
+                //url "http://192.168.1.112:8081/nexus/content/repositories/aaron-release/"
+				url "http://192.168.1.112:8081/nexus/content/repositories/releases/"
             }
 			credentials {
-				username = 'aaron'
-				password = 'aaron123'
+				username = 'deployment'
+				password = 'deployment123'
 			}
         }
     }

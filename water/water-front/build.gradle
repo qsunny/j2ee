@@ -1,0 +1,33 @@
+apply plugin: 'war'
+//apply plugin: 'jetty'
+
+dependencies {
+    compile project(":water-core")
+
+    runtime	'javax.servlet:jstl:1.2'
+
+}
+
+/*
+jettyRun{
+	contextPath = ""
+	httpPort = 8080
+	//httpsEnabled = true
+	//jvmArgs = ['-Xmx1024M', '-XX:PermSize=128M', '-XX:MaxPermSize=256M']
+	//debugSuspend = false
+	reload = "automatic"
+	scanIntervalSeconds = 2
+}
+
+jettyRunWar{
+	contextPath = ""
+	httpPort = 8080
+}
+
+// 自定义resource文件夹
+sourceSets {
+    main {
+      resources.srcDirs = ['src/main/resources']
+	}
+}
+*/

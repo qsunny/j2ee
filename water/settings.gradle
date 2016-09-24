@@ -1,0 +1,5 @@
+rootProject.name = 'water'
+include 'water-api'
+include 'water-core'
+include 'water-front'
+
