@@ -15,3 +15,22 @@ all projects were base in gradle build ==> [gradle reference](https://docs.gradl
 ### testdemostrate ###
 > driver test demostrate for example mock,junit etc
 
+### water ###
+> mutiple module build manager base on spring4.2.4.RELEASE、mybatis3.3.0、springMvc demostrate、config file base on     
+> XML
+
+### zookeeperapp ###
+> zookeeper service install & use application to do CRUD test demostrate 
+
+### tools ###
+> java common utils project
+
+### spring ###
+> about spring using test & demostrate
+
+### logbackexample ###
+> about logback using demostrate
+
+### java8example ###
+> about java8 features using test&demostrate
+  
