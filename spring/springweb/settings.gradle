@@ -1,0 +1,5 @@
+rootProject.name = 'springweb'
+include 'springweb-api'
+include 'springweb-core'
+include 'springweb-front'
+
