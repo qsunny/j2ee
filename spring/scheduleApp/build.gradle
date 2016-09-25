@@ -1,0 +1,73 @@
+ext {
+    springVersion="4.2.4.RELEASE"
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    // JDK 8
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    // 全局属性设置
+    ext {
+        // java文件编码方式设置为utf-8
+        compileJava.options.encoding = 'UTF-8'
+        compileTestJava.options.encoding = 'UTF-8'
+        javadoc.options.encoding = 'utf-8'
+
+    }
+
+    repositories {
+        //使用Maven本地缓存
+        mavenLocal()
+        maven {
+            /*
+            credentials {
+                username 'aaron'
+                password 'aaron123'
+            }*/
+            url "http://192.168.1.112:8081/nexus/content/groups/public/"
+        }
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+            name = "Alibaba maven库"
+        }
+        maven {
+            url "http://repo1.maven.org/maven2"
+        }
+        maven {
+            url "https://repo.spring.io/libs-release"
+        }
+        maven { url 'http://repo.spring.io/snapshot' }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        jcenter()
+        mavenCentral()
+    }
+}
+
+dependencies {
+    compile "org.springframework:spring-context-support:$springVersion"
+    compile "org.springframework:spring-context:$springVersion"
+    compile "org.springframework:spring-core:$springVersion"
+    compile "org.springframework:spring-beans:$springVersion"
+    compile "org.springframework:spring-web:$springVersion"
+    compile "org.springframework:spring-webmvc:$springVersion"
+    compile "org.springframework:spring-test:$springVersion"
+    compile "org.springframework:spring-jdbc:$springVersion"
+    compile "org.springframework:spring-aop:$springVersion"
+    compile "org.springframework:spring-tx:$springVersion"
+    compile "org.springframework:spring-orm:$springVersion"
+    //compile "org.springframework:spring-aspects:$springVersion"
+    compile 'aspectj:aspectjrt:1.5.4'
+    compile "org.springframework:spring-jms:$springVersion"
+    compile "org.springframework:spring-expression:$springVersion"
+    compile 'org.springframework.data:spring-data-redis:1.6.2.RELEASE'
+    compile 'org.springframework:spring-remoting:2.0.8'
+    compile 'org.quartz-scheduler:quartz:2.2.2'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.1.7'
+    testCompile 'junit:junit:4.12'
+}

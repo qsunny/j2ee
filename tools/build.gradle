@@ -3,6 +3,7 @@ apply plugin: 'idea'
 apply plugin: 'maven-publish'
 
 version = '1.0.0.RELEASE'
+
 jar {
     manifest {
         attributes 'Implementation-Title': 'tools',
@@ -126,7 +127,7 @@ publishing {
 	        }
 	        //没错 我同时把resource指向了java目录 这样就可以收录java目录中的资源文件了
 	        resources {
-	            srcDirs = ['src/main/java']
+	            srcDirs = ['src/main/resources','src/main/java']
 	        }
 	    }
 	}
