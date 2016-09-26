@@ -1,9 +1,12 @@
 package com.aaron.springweb.web.config;
 
+import com.aaron.springweb.bean.Pizza;
+import com.aaron.springweb.web.viewresolver.*;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.FormHttpMessageConverter;
@@ -11,13 +14,17 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
+import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
+import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -27,6 +34,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableWebMvc //<mvc:annotation-driven />
+@ImportResource("classpath*:commons.xml")
 @ComponentScan({ "com.aaron.springweb.web.controller" })
 public class SpringwebConfig extends WebMvcConfigurerAdapter {
 
@@ -67,6 +75,72 @@ public class SpringwebConfig extends WebMvcConfigurerAdapter {
         configurer.mediaType("json", MediaType.APPLICATION_JSON);
     }
 
+    /*
+     * Configure ContentNegotiatingViewResolver
+     */
+    @Bean
+    public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
+        ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
+        resolver.setOrder(0);
+        resolver.setContentNegotiationManager(manager);
+
+        // Define all possible view resolvers
+        List<ViewResolver> resolvers = new ArrayList<ViewResolver>();
+
+        resolvers.add(jaxb2MarshallingXmlViewResolver());
+        resolvers.add(jsonViewResolver());
+        resolvers.add(pdfViewResolver());
+        resolvers.add(excelViewResolver());
+        resolvers.add(excelXlsxlViewResolver());
+
+        resolver.setViewResolvers(resolvers);
+        return resolver;
+    }
+
+    /*
+    * Configure View resolver to provide XML output Uses JAXB2 marshaller to
+    * marshall/unmarshall POJO's (with JAXB annotations) to XML
+    */
+    @Bean
+    public ViewResolver jaxb2MarshallingXmlViewResolver() {
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setClassesToBeBound(Pizza.class);
+        return new Jaxb2MarshallingXmlViewResolver(marshaller);
+    }
+
+
+    /*
+     * Configure View resolver to provide JSON output using JACKSON library to
+     * convert object in JSON format.
+     */
+    @Bean
+    public ViewResolver jsonViewResolver() {
+        return new JsonViewResolver();
+    }
+
+    /*
+     * Configure View resolver to provide PDF output using lowagie pdf library to
+     * generate PDF output for an object content
+     */
+    @Bean
+    public ViewResolver pdfViewResolver() {
+        return new PdfViewResolver();
+    }
+
+    /*
+     * Configure View resolver to provide XLS output using Apache POI library to
+     * generate XLS output for an object content
+     */
+    @Bean
+    public ViewResolver excelViewResolver() {
+        return new ExcelViewResolver();
+    }
+
+    @Bean
+    public XlsxViewResolver excelXlsxlViewResolver() {
+        return new XlsxViewResolver();
+    }
+
 	/*
 	 * 拦截器使用
 	 *
@@ -88,6 +162,7 @@ public class SpringwebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ViewResolver resolver() {
         InternalResourceViewResolver urvr = new InternalResourceViewResolver();
+        urvr.setOrder(1);
         urvr.setViewClass(JstlView.class);
         urvr.setPrefix("/WEB-INF/page/");
         urvr.setSuffix(".jsp");

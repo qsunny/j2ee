@@ -21,6 +21,7 @@ dependencies {
     compile "org.springframework:spring-aop:$springVersion"
     compile "org.springframework:spring-tx:$springVersion"
     compile "org.springframework:spring-orm:$springVersion"
+    compile "org.springframework:spring-oxm:$springVersion"
     //compile "org.springframework:spring-aspects:$springVersion"
     compile 'aspectj:aspectjrt:1.5.4'
     compile "org.springframework:spring-jms:$springVersion"
@@ -44,7 +45,15 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.7.4'
     compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.7.4'
     compile 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.7.4'
+    compile "com.fasterxml.jackson.core:jackson-annotations:2.4.1"
     compile 'com.aaron:tools:1.0.0.RELEASE'
+    //Pdf library
+    compile "com.lowagie:itext:4.2.1"
+    compile "org.apache.poi:poi:3.14"
+    //<!-- Jackson JSON Mapper --> 没有测试 实体bean对象转换成json字符串
+    //compile "org.codehaus.jackson:jackson-mapper-asl:1.9.10"
+
+
 
 }
 
