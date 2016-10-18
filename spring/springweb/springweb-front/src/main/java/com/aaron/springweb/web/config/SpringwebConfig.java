@@ -91,7 +91,7 @@ public class SpringwebConfig extends WebMvcConfigurerAdapter {
         resolvers.add(jsonViewResolver());
         resolvers.add(pdfViewResolver());
         resolvers.add(excelViewResolver());
-        resolvers.add(excelXlsxlViewResolver());
+        //resolvers.add(excelXlsxlViewResolver());
 
         resolver.setViewResolvers(resolvers);
         return resolver;
@@ -136,10 +136,12 @@ public class SpringwebConfig extends WebMvcConfigurerAdapter {
         return new ExcelViewResolver();
     }
 
+    /*
     @Bean
     public XlsxViewResolver excelXlsxlViewResolver() {
         return new XlsxViewResolver();
     }
+    */
 
 	/*
 	 * 拦截器使用
