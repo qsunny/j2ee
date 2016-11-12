@@ -3,9 +3,10 @@ apply plugin: 'war'
 
 dependencies {
     compile project(":water-core")
-
-    runtime	'javax.servlet:jstl:1.2'
-
+    compile 'javax.servlet:jstl:1.2'
+    compile 'javax.servlet.jsp:jsp-api:2.2'
+    //providedRuntime	'javax.servlet:jstl:1.2'
+    //providedRuntime	'javax.servlet.jsp:jsp-api:2.2'
 }
 
 /*

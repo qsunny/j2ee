@@ -6,11 +6,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib prefix="w" uri="/customtaglib" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title>water index</title>
   </head>
   <body>
-  $END$
+    <w:HelloWorld/>
+    <br/>
+    <w:SendMessage from="Aaron.Qiu" to="Killy">See you toworrow</w:SendMessage>
   </body>
 </html>
