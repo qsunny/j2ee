@@ -17,7 +17,9 @@ all projects were base in gradle build ==> [gradle reference](https://docs.gradl
 
 ### water ###
 > mutiple module build manager base on spring4.2.4.RELEASE、mybatis3.3.0、springMvc demostrate、config file base on     
-> XML
+> XML.
+
+1.  custom jsp tag example
 
 ### zookeeperapp ###
 > zookeeper service install & use application to do CRUD test demostrate 
