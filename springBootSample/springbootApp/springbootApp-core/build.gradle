@@ -1,0 +1,32 @@
+apply plugin: 'spring-boot'
+
+ext {
+    springVersion="4.2.4.RELEASE"
+    springBootVersion="1.4.1.RELEASE"
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    compile project(':springbootApp-api')
+    compile 'com.alibaba:druid:1.0.16'
+    compile 'mysql:mysql-connector-java:5.1.38'
+    //compile "org.springframework.boot:spring-boot-starter-integration:1.4.1.RELEASE"
+    //compile "org.springframework.boot:spring-boot-starter-redis:1.4.1.RELEASE"
+    compile ('org.springframework.boot:spring-boot-starter-web') {
+        //exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    }
+
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        //没错 我同时把resource指向了java目录 这样就可以收录java目录中的资源文件了
+        resources {
+            srcDirs = ['src/main/resources','src/main/java']
+        }
+
+    }
+}

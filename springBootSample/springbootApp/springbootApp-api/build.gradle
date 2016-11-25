@@ -1,0 +1,74 @@
+apply plugin: 'maven-publish'
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.13'
+    compile "org.apache.commons:commons-lang3:3.4"
+    //compile "javax.servlet:javax.servlet-api:3.1.0"
+}
+
+
+task apiJar(type: Jar) {
+    baseName "springbootApp-api"
+    version  "$version"
+
+    from sourceSets.main.output
+    //exclude '**/impl/**'
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+
+task javadocJar (type: Jar, dependsOn: javadoc) {
+    //classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+publishing {
+    repositories {
+        maven {
+            // change to point to your repo, e.g. http://my.org/repo
+            if(version.endsWith('-SNAPSHOT')) {
+                url "http://192.168.1.112:8081/nexus/content/repositories/aaron-snapshots/"
+            } else {
+                url "http://192.168.1.112:8081/nexus/content/repositories/aaron-release/"
+            }
+            credentials {
+                username = 'aaron'
+                password = 'aaron123'
+            }
+        }
+    }
+
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+
+            /*
+            artifact(javadocJar) {
+                classifier = 'javadoc'
+            }
+            */
+
+            groupId "com.aaron"
+            artifactId	"springbootApp-api"
+            version 	"$version"
+        }
+    }
+
+    sourceSets {
+        main {
+            java {
+                srcDirs = ['src/main/java']
+            }
+            //没错 我同时把resource指向了java目录 这样就可以收录java目录中的资源文件了
+            resources {
+                srcDirs = ['src/main/resources','src/main/java']
+            }
+        }
+    }
+}
