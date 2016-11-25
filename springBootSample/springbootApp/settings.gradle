@@ -1,0 +1,5 @@
+rootProject.name = 'springbootApp'
+include 'springbootApp-api'
+include 'springbootApp-core'
+include 'springbootApp-web'
+
