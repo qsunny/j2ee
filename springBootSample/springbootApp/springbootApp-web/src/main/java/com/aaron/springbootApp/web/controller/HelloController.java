@@ -14,7 +14,7 @@ public class HelloController {
     @Autowired
     private HelloSerivce helloService;
 
-    @RequestMapping("/")
+    @RequestMapping("/home")
     String home() {
         return helloService.sayHello("Aaron!");
     }

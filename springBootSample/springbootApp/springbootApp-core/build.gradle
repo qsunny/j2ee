@@ -1,22 +1,39 @@
 apply plugin: 'spring-boot'
 
 ext {
-    springVersion="4.2.4.RELEASE"
-    springBootVersion="1.4.1.RELEASE"
+    springVersion="4.3.3.RELEASE"
+    mybatisSpringVersion="1.1.1"
 }
 
-// In this section you declare the dependencies for your production and test code
 dependencies {
     compile project(':springbootApp-api')
+
+    compile 'aspectj:aspectjrt:1.5.4'
+    compile('javax.servlet:javax.servlet-api')
+    compile('javax.servlet:jstl')
+    compile 'com.google.code.gson:gson:2.5'
+    compile 'commons-codec:commons-codec:1.10'
+    compile 'net.sf.json-lib:json-lib:2.4:jdk15'
+    compile 'org.aspectj:aspectjweaver:1.8.7'
     compile 'com.alibaba:druid:1.0.16'
     compile 'mysql:mysql-connector-java:5.1.38'
-    //compile "org.springframework.boot:spring-boot-starter-integration:1.4.1.RELEASE"
-    //compile "org.springframework.boot:spring-boot-starter-redis:1.4.1.RELEASE"
-    compile ('org.springframework.boot:spring-boot-starter-web') {
-        //exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+    compile('com.aaron:tools:1.0.0.RELEASE'){
+        transitive=false
     }
-
+    compile 'org.mybatis:mybatis:3.3.0'
+    compile 'org.mybatis:mybatis-spring:1.2.3'
+    compile 'com.github.miemiedev:mybatis-paginator:1.2.17'
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    compile "org.springframework.boot:spring-boot-starter"
+    compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1") {
+        transitive=false
+    }
+    compile "org.springframework.boot:spring-boot-starter-redis"
+    compile("org.springframework.boot:spring-boot-starter-jdbc")
+    compile("org.springframework.boot:spring-boot-starter-freemarker")
+    compile("org.springframework.boot:spring-boot-devtools")
 }
+
 
 sourceSets {
     main {
