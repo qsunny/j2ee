@@ -50,4 +50,9 @@ public class IndexController {
         return "welcome";
     }
 
+    @RequestMapping("index")
+    public String index(Map<String,Object> model) {
+        return "userlogin/index";
+    }
+
 }

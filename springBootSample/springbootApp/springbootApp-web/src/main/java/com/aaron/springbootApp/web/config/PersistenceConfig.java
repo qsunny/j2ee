@@ -4,6 +4,8 @@ import com.alibaba.druid.pool.DruidDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +25,8 @@ import java.sql.SQLException;
 @Configuration
 @EnableTransactionManagement
 public class PersistenceConfig {
+
+    private static final Logger logger = LoggerFactory.getLogger(PersistenceConfig.class);
 
     @Autowired
     private Environment env;
@@ -65,20 +69,24 @@ public class PersistenceConfig {
 	}
 
     @Bean
-    public SqlSessionFactory sqlSessionFactory() throws Exception {
+    public SqlSessionFactory sqlSessionFactory() {
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setConfigLocation(new ClassPathResource("mybatis.xml"));
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        Resource[] classPathResources = resolver.getResources("classpath*:mybatis/mapper/*/*.xml");
-        sqlSessionFactory.setMapperLocations(classPathResources);
-        sqlSessionFactory.setDataSource(this.dataSource());
-        return sqlSessionFactory.getObject();
+        try {
+            Resource[] classPathResources = resolver.getResources("classpath*:mybatis/mapper/*/*.xml");
+            sqlSessionFactory.setMapperLocations(classPathResources);
+            sqlSessionFactory.setDataSource(this.dataSource());
+            return sqlSessionFactory.getObject();
+        } catch (Exception e) {
+            logger.error("初始化SqlSessionFactory失败", e);
+            throw new RuntimeException(e);
+        }
     }
 
     @Bean
-    public SqlSessionTemplate sqlSessionTemplate() throws Exception {
-        SqlSessionTemplate sqlSessionTemplate;
-        sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory());
+    public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) throws Exception {
+        SqlSessionTemplate sqlSessionTemplate = new SqlSessionTemplate(sqlSessionFactory);
         return sqlSessionTemplate;
     }
 
