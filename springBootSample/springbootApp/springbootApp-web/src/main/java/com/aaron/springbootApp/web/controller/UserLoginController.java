@@ -6,7 +6,8 @@ import com.aaron.springbootApp.core.service.RedisService;
 import com.aaron.springbootApp.exception.SpringbootAppException;
 import com.aaron.tools.utils.JsonUtils;
 import com.aaron.tools.utils.UUIDGenerator;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,7 @@ import java.util.List;
 @RequestMapping("/userlogin")
 public class UserLoginController {
 
-	private static final Logger log = Logger.getLogger(UserLoginController.class);
+	private static final Logger log = LoggerFactory.getLogger(UserLoginController.class);
 	
 	@Resource
 	private IUserService userService;
@@ -47,7 +48,7 @@ public class UserLoginController {
 			System.out.println("redis user ==========="+u);
 			model.addAttribute("user", u);
 		} catch (SpringbootAppException e) {
-			log.error(e);
+			log.error("loginIndex",e);
 		}
 		return "hello";
 	}
@@ -58,7 +59,7 @@ public class UserLoginController {
 			u.setId(UUIDGenerator.generate());
 			userService.insertUser(u);
 		} catch (SpringbootAppException e) {
-			log.error(e);
+			log.error(e.getMessage());
 		}
 		
 		return "redirect:/userlogin/index.jhtml";
@@ -71,7 +72,7 @@ public class UserLoginController {
 		try {
 			userService.updateUser(user);
 		} catch (SpringbootAppException e) {
-			log.error(e);
+			log.error(e.getMessage());
 		}
 		return "redirect:/userlogin/index.jhtml";
 	}
@@ -81,7 +82,7 @@ public class UserLoginController {
 		try {
 			userService.deleteUserById(user.getId());
 		} catch (SpringbootAppException e) {
-			log.error(e);
+			log.error(e.getMessage());
 		}
 		return "redirect:/userlogin/index.jhtml";
 	}
@@ -90,8 +91,8 @@ public class UserLoginController {
 	public String redisAdd(HttpServletRequest request,HttpServletResponse response,ModelMap model,User user) throws SpringbootAppException {
 		User u = userService.getUserById(user.getId());
 		redisService.put(user.getId(), JsonUtils.toJson(u));
-		return "redirect:/userlogin/index.jhtml?id="+user.getId();
+		return "redirect:/userlogin/index.jhtml?id="+u.getId();
 	}
-	
-	
+
+
 }

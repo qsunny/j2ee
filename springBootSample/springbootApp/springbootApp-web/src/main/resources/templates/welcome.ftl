@@ -8,6 +8,8 @@ Date: ${time?date}
 Time: ${time?time}
 <br>
 Message: ${message}
+<br>
+description : ${description}
 </body>
 
 </html>
