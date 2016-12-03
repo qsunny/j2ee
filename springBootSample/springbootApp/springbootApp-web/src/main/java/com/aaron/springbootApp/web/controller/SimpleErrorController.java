@@ -17,7 +17,7 @@ import java.util.Map;
  * Created by aaron.qiu on 2016/11/27.
  */
 @RestController
-@RequestMapping("/error")
+@RequestMapping("/errorv2")
 public class SimpleErrorController implements ErrorController {
 
     private final ErrorAttributes errorAttributes;
