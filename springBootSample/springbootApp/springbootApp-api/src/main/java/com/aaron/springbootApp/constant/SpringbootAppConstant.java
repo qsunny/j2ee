@@ -8,4 +8,6 @@ package com.aaron.springbootApp.constant;
  * @Copyright:Copyright (c) 2016 ~ 2017 版权所有
  */
 public class SpringbootAppConstant {
+    public static final int RESPONSE_SUCCESS_CODE = 100;
+    public static final int RESPONSE_FAILTER_CODE = 101;
 }
