@@ -1,5 +1,8 @@
 package com.aaron.water.web.controller;
 
+import com.aaron.springbootApp.api.IUserInfoApi;
+import com.aaron.springbootApp.bean.User;
+import com.aaron.tools.vo.ReturnVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +21,11 @@ import java.util.Map;
 public class IndexController {
 
 	private final Logger log = LoggerFactory.getLogger(IndexController.class);
-	
+
+
+	@Resource
+	private IUserInfoApi userInfoApi;
+
 	@Value("${app.name}")
 	private String applicationName;
 	
@@ -31,7 +39,10 @@ public class IndexController {
 		env.getProperty("jdbc.name");
 		model.put("title", applicationName);
 		model.put("msg", "Hello Gradle!");
-
+		System.out.println("======================================");
+		ReturnVo<User> rto = userInfoApi.getUserId("22123fjdkfjdkfjse");
+		System.out.println("======================================"+rto.getResponseMsg());
+		log.debug("userInfoApi==============>"+rto.getVo());
 		return "index";
 	}
 

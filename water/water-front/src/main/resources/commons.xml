@@ -19,6 +19,8 @@
         <!-- 
          -->
         <import resource="classpath*:/spring_common.xml" />
-        
+		<import resource="classpath*:/water_dubbo.xml" />
+		<import resource="classpath*:/water_dubbo_customer.xml" />
+		<import resource="classpath*:/water_dubbo_provider.xml" />
 		
 </beans>        
