@@ -32,13 +32,13 @@ publishing {
         maven {
             // change to point to your repo, e.g. http://my.org/repo
             if(version.endsWith('-SNAPSHOT')) {
-                url "http://192.168.1.112:8081/nexus/content/repositories/aaron-snapshots/"
+                url "http://192.168.1.112:8081/nexus/content/repositories/snapshots/"
             } else {
-                url "http://192.168.1.112:8081/nexus/content/repositories/aaron-release/"
+                url "http://192.168.1.112:8081/nexus/content/repositories/releases/"
             }
             credentials {
-                username = 'aaron'
-                password = 'aaron123'
+                username = 'deployment'
+                password = 'deployment123'
             }
         }
     }

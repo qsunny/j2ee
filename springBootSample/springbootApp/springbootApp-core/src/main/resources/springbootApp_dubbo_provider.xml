@@ -10,8 +10,8 @@
 	<!--
 	<dubbo:service interface="com.api.IUserAddressApi"
 		ref="userAddressApiImpl" registry="zookeeper" owner="Aaron.Qiu" version="1.0" />
-	-->
+
+-->
 	<dubbo:service interface="com.aaron.springbootApp.api.IUserInfoApi"
 				   ref="userInfoApiImpl" registry="zookeeper" owner="Aaron.Qiu" version="1.0" />
-
 </beans>

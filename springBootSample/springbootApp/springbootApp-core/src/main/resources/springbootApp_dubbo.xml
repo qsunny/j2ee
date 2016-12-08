@@ -12,5 +12,6 @@
 	<dubbo:consumer check="false" timeout="300000" />
 	<dubbo:provider timeout="300000" />
 	<dubbo:protocol name="dubbo" port="20885" dispather="all"	threadpool="cached" threads="5000" />
-	
+	<import resource="classpath*:/springbootApp_dubbo_customer.xml" />
+	<import resource="classpath*:/springbootApp_dubbo_provider.xml" />
 </beans>

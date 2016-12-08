@@ -19,6 +19,7 @@ dependencies {
     compile 'mysql:mysql-connector-java:5.1.38'
     compile 'com.github.sgroschupf:zkclient:0.1'
     compile 'org.jboss.netty:netty:3.2.0.Final'
+    compile 'org.javassist:javassist:3.20.0-GA'
     compile ('com.alibaba:dubbo:2.5.3') {
         transitive=false
     }
