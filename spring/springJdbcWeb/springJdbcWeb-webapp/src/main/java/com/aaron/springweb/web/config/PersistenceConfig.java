@@ -1,15 +1,18 @@
 package com.aaron.springweb.web.config;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableTransactionManagement
@@ -29,7 +32,13 @@ public class PersistenceConfig {
 		return transactionManager;
 	}
 
-	
+	@Bean
+	public DataSource dataSource() {
+		DataSource bean = new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2)
+				.addScript("classpath:schema.sql").build();
+		return bean;
+	}
+
 	/*@Bean
 	public DataSource dataSource()	{
 		BasicDataSource dataSource = new BasicDataSource();
@@ -39,14 +48,7 @@ public class PersistenceConfig {
 		dataSource.setPassword(env.getProperty("jdbc.password"));
 		return dataSource;
 	}*/
-	
-	@Bean
-	public DataSource dataSource() {
-		DataSource bean = new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2)
-				.addScript("classpath:schema.sql").build();
-		return bean;
-	}
-	
+
 	/*@Bean
 	public DataSourceInitializer dataSourceInitializer(DataSource dataSource) 
 	{
@@ -58,4 +60,23 @@ public class PersistenceConfig {
 		dataSourceInitializer.setEnabled(Boolean.parseBoolean(initDatabase));
 		return dataSourceInitializer;
 	}	*/
+
+	@Bean
+	public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		return jdbcTemplate;
+	}
+
+	@Bean
+	public NamedParameterJdbcTemplate namedParameterJdbcTemplate(DataSource dataSource) {
+		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
+		return namedParameterJdbcTemplate;
+	}
+
+	@Bean
+	public SimpleJdbcInsert simpleJdbcInsert(DataSource dataSource) {
+		SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(dataSource);
+		return simpleJdbcInsert;
+	}
+
 }

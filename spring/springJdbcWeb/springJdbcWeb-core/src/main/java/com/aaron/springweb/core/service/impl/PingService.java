@@ -1,16 +1,16 @@
 package com.aaron.springweb.core.service.impl;
 
-import java.util.List;
-import java.util.Map;
-
+import com.aaron.springweb.bean.Page;
+import com.aaron.springweb.bean.Ping;
+import com.aaron.springweb.core.dao.IPingDao;
+import com.aaron.springweb.core.service.IPingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aaron.springweb.core.dao.IPingDao;
-import com.aaron.springweb.core.service.IPingService;
+import java.util.List;
 
 @Service
 public class PingService implements IPingService {
@@ -29,9 +29,15 @@ public class PingService implements IPingService {
 	@Transactional(propagation=Propagation.SUPPORTS,
 			isolation=Isolation.READ_COMMITTED,
 			readOnly=true)
+
 	@Override
-	public List<Map<String, Object>> findAllPings() {
+	public List<Ping> findAllPings() {
 		return pingDao.findAllPings();
+	}
+
+	@Override
+	public Page<Ping> getAllPingByPage(Page<Ping> page) {
+		return pingDao.getAllPingByPage(page);
 	}
 
 }
