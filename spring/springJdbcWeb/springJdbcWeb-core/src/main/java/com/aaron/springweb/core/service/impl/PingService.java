@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PingService implements IPingService {
@@ -31,7 +32,7 @@ public class PingService implements IPingService {
 			readOnly=true)
 
 	@Override
-	public List<Ping> findAllPings() {
+	public List<Map<String,Object>> findAllPings() {
 		return pingDao.findAllPings();
 	}
 

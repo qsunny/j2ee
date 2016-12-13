@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class PingDao extends BaseDao<Ping> implements IPingDao {
@@ -23,15 +24,15 @@ public class PingDao extends BaseDao<Ping> implements IPingDao {
 	}
 
 	@Override
-	public List<Ping> findAllPings() {
+	public List<Map<String,Object>> findAllPings() {
 
-		return this.findByArgs("SELECT * FROM PING ORDER BY TS",null,Ping.class);
+		return this.queryForList("SELECT * FROM PING ORDER BY TS",null);
 	}
 
 	@Override
 	public Page<Ping> getAllPingByPage(Page<Ping> page) {
 		String sql = "SELECT * FROM PING ORDER BY TS";
-		return this.findBySqlForPage(sql,null);
+		return this.findBySqlForPage(sql,null,page);
 	}
 
 

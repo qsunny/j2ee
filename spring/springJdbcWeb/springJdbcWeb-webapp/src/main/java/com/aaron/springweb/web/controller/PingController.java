@@ -3,6 +3,8 @@ package com.aaron.springweb.web.controller;
 import com.aaron.springweb.bean.Page;
 import com.aaron.springweb.bean.Ping;
 import com.aaron.springweb.core.service.IPingService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 	http://localhost:8080/ping/tester1
@@ -41,15 +44,12 @@ public class PingController {
 	@RequestMapping(value = "/pings", produces = "text/plain")
 	@ResponseBody
 	public String pings() {
-		List<Ping> result = pingService.findAllPings();
+		List<Map<String,Object>> result = pingService.findAllPings();
 		if (result.size() == 0)
 			return "No record found.";
-
-		StringBuilder sb = new StringBuilder();
-		for (Ping row : result) {
-			sb.append("Ping" + row).append("\n");
-		}
-		return sb.toString();
+		GsonBuilder gb = new GsonBuilder();
+		Gson gson = gb.create();
+		return gson.toJson(result);
 	}
 
 	@RequestMapping(value = "/pingPage", produces = "text/plain")
@@ -60,12 +60,8 @@ public class PingController {
 		page.setCurrNum(1);
 		page.setPreSize(2);
 		Page<Ping> p = pingService.getAllPingByPage(page);
-		System.out.println("=========================>"+p);
-		List<Ping> list = p.getData();
-		StringBuilder sb = new StringBuilder();
-		for (Ping ping : list) {
-			sb.append("Ping" + ping.toString()).append("\n");
-		}
-		return sb.toString();
+		GsonBuilder gb = new GsonBuilder();
+		Gson gson = gb.create();
+		return gson.toJson(p);
 	}
 }
