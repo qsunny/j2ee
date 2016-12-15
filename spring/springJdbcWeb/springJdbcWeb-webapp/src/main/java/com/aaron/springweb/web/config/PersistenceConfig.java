@@ -11,6 +11,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import javax.sql.DataSource;
 
@@ -41,8 +42,8 @@ public class PersistenceConfig {
 
 	/*@Bean
 	public DataSource dataSource()	{
-		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
+		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
+		dataSource.setDriverClass(Driver.class);
 		dataSource.setUrl(env.getProperty("jdbc.url"));
 		dataSource.setUsername(env.getProperty("jdbc.username"));
 		dataSource.setPassword(env.getProperty("jdbc.password"));
@@ -78,5 +79,13 @@ public class PersistenceConfig {
 		SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(dataSource);
 		return simpleJdbcInsert;
 	}
+	
+	/*
+	@Bean(initMethod = "start",destroyMethod = "stop")
+    public Server tcpServer() throws SQLException {
+        Server server = Server.createTcpServer(new String[]{"-tcp","-tcpAllowOthers","-tcpPort","8043"});
+        return server;
+    }
+	*/
 
 }
