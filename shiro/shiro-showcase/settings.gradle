@@ -1,3 +1,4 @@
 rootProject.name = 'shiro-showcase'
 include 'shiro-showcase1'
+include 'shiro-showcase2'
 
