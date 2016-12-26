@@ -1,7 +1,7 @@
 package com.aaron.tools.utils;
 
 
-import com.rambo.exceptions.ClassInstantiationException;
+import com.aaron.tools.exception.ClassInstantiationException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,8 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import static com.rambo.tools.CollectionUtil.createHashSet;
-import static com.rambo.tools.CollectionUtil.createLinkedList;
+import static com.aaron.tools.utils.CollectionUtil.createHashSet;
+import static com.aaron.tools.utils.CollectionUtil.createLinkedList;
 
 /**
  * <p>
@@ -184,7 +184,7 @@ public class ClassLoaderUtil {
      * throws ClassInstantiationException 如果实例化失败
      */
     public static Object newInstance(String className, ClassLoader classLoader) throws ClassNotFoundException,
-            com.rambo.exceptions.ClassInstantiationException {
+            com.aaron.tools.exception.ClassInstantiationException {
         return newInstance(loadClass(className, classLoader));
     }
 

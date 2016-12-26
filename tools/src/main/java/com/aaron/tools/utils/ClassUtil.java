@@ -11,12 +11,12 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static com.rambo.tools.ArrayUtil.isArraySameLength;
-import static com.rambo.tools.ArrayUtil.isEmptyArray;
-import static com.rambo.tools.BasicConstant.EMPTY_CLASS_ARRAY;
-import static com.rambo.tools.BasicConstant.EMPTY_STRING;
-import static com.rambo.tools.CollectionUtil.createHashMap;
-import static com.rambo.tools.CollectionUtil.createHashSet;
+import static com.aaron.tools.utils.ArrayUtil.isArraySameLength;
+import static com.aaron.tools.utils.ArrayUtil.isEmptyArray;
+import static com.aaron.tools.utils.BasicConstant.EMPTY_CLASS_ARRAY;
+import static com.aaron.tools.utils.BasicConstant.EMPTY_STRING;
+import static com.aaron.tools.utils.CollectionUtil.createHashMap;
+import static com.aaron.tools.utils.CollectionUtil.createHashSet;
 
 /**
  * 有关 <code>Class</code> 处理的工具类。

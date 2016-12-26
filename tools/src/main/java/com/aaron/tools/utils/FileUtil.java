@@ -1,6 +1,6 @@
 package com.aaron.tools.utils;
 
-import com.rambo.exceptions.IllegalPathException;
+import com.aaron.tools.exception.IllegalPathException;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,8 +8,8 @@ import java.io.InputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.rambo.tools.StringUtil.trimToEmpty;
-import static com.rambo.tools.StringUtil.trimToNull;
+import static com.aaron.tools.utils.StringUtil.trimToEmpty;
+import static com.aaron.tools.utils.StringUtil.trimToNull;
 
 public class FileUtil {
     private static final Pattern schemePrefixPattern = Pattern.compile("(file:*[a-z]:)|(\\w+://.+?/)|((jar|zip):.+!/)|(\\w+:)", Pattern.CASE_INSENSITIVE);
@@ -489,7 +489,7 @@ public class FileUtil {
             int index = path.lastIndexOf('.');
 
             if (index >= 0) {
-                extension = StringUtil.trimToNull(StringUtil.substring(path, index + 1));
+                extension = trimToNull(StringUtil.substring(path, index + 1));
 
                 if (!StringUtil.containsNone(extension, "/\\")) {
                     extension = null;

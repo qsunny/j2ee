@@ -3,7 +3,7 @@ package com.aaron.tools.utils;
 import java.io.IOException;
 import java.util.Arrays;
 
-import static com.rambo.tools.BasicConstant.EMPTY_STRING;
+import static com.aaron.tools.utils.BasicConstant.EMPTY_STRING;
 
 
 /**
