@@ -1,9 +1,8 @@
-package com.aaron.tools.utils;
-
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
+package com.aaron.tools.encryption;
 
 import javax.net.ssl.X509TrustManager;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 
 public class MyX509TrustManager implements X509TrustManager {
 

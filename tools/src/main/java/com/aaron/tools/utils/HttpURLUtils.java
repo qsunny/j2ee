@@ -1,5 +1,6 @@
 package com.aaron.tools.utils;
 
+import com.aaron.tools.encryption.MyX509TrustManager;
 import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -282,7 +283,7 @@ public final class HttpURLUtils {
         StringBuffer buffer = new StringBuffer();  
         try {  
             // 创建SSLContext对象，并使用我们指定的信任管理器初始化  
-            TrustManager[] tm = { new MyX509TrustManager() };  
+            TrustManager[] tm = { new MyX509TrustManager() };
             SSLContext sslContext = SSLContext.getInstance("SSL", "SunJSSE");  
             sslContext.init(null, tm, new java.security.SecureRandom());  
             // 从上述SSLContext对象中得到SSLSocketFactory对象  

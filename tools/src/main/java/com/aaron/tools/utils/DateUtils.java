@@ -12,6 +12,7 @@ import java.util.List;
  * @author aaron.qiu
  * @since 2015-2016
  */
+@Deprecated
 public class DateUtils {
 	  public static String formatDate(java.util.Date date)	  {
 		  return formatDateByFormat(date, "yyyy-MM-dd");

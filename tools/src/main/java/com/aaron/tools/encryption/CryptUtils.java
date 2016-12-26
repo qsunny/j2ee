@@ -1,4 +1,4 @@
-package com.aaron.tools.utils;
+package com.aaron.tools.encryption;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
