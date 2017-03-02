@@ -1,0 +1,7 @@
+apply plugin: 'application'
+
+mainClassName = "com.aaron.MainRunApp"
+
+applicationName = 'mainApp'
+
+applicationDefaultJvmArgs = ["-Xms512m", "-Xmx1024m"]

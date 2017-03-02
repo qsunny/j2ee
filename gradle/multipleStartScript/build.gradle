@@ -1,0 +1,21 @@
+apply plugin: 'application'
+
+mainClassName = "com.mkyong.analyzer.run.threads.MainRunApp"
+
+applicationName = 'mainApp'
+
+applicationDefaultJvmArgs = ["-Xms512m", "-Xmx1024m"]
+
+task createExtraRunApp(type: CreateStartScripts) {
+    mainClassName = "com.aaron.run.UpdateHostingExtraRunApp"
+    classpath = startScripts.classpath
+    outputDir = startScripts.outputDir
+    applicationName = 'hostingExtraApp'
+    defaultJvmOpts = ["-Xms1024m", "-Xmx2048m"]
+}
+
+applicationDistribution.into("bin") {
+    duplicatesStrategy= DuplicatesStrategy.EXCLUDE
+    from(createExtraRunApp)
+    fileMode = 0755
+}

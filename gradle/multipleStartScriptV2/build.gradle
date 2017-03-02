@@ -1,0 +1,57 @@
+apply plugin: 'application'
+mainClassName = "com.hostingcompass.analyzer.run.threads.HydraRunApp"
+applicationName = 'hydra'
+
+applicationDefaultJvmArgs = ["-Dlogback.configurationFile=MY_APP_HOME/logback-hydra.xml",
+                             "-Dconfig=MY_APP_HOME/config.properties",
+							"-Djava.net.preferIPv4Stack=true", "-Dapp.home=MY_APP_HOME/", "-Xms512m", "-Xmx1024m"]
+
+startScripts {
+    doLast {
+        unixScript.text = unixScript.text.replace('MY_APP_HOME', '\$APP_HOME')
+        windowsScript.text = windowsScript.text.replace('MY_APP_HOME', '%~dp0..')
+    }
+}
+
+task updateHostingExtraRunApp(type: CreateStartScripts) {
+    mainClassName = "com.hostingcompass.analyzer.run.UpdateHostingExtraRunApp"
+    classpath = startScripts.classpath
+    outputDir = startScripts.outputDir
+    applicationName = 'hostingExtra'
+    defaultJvmOpts = ["-Dlogback.configurationFile=MY_APP_HOME/logback-hosting-extra.xml",
+                      "-Dconfig=MY_APP_HOME/config.properties", "-Dapp.home=MY_APP_HOME/", "-Xms512m", "-Xmx1024m"]
+
+    updateHostingExtraRunApp {
+        doLast {
+            unixScript.text = unixScript.text.replace('MY_APP_HOME', '\$APP_HOME')
+            windowsScript.text = windowsScript.text.replace('MY_APP_HOME', '%~dp0..')
+        }
+    }
+}
+
+task updateWhoisExtraRunApp(type: CreateStartScripts) {
+    mainClassName = "com.hostingcompass.analyzer.run.UpdateWhoisExtraRunApp"
+    classpath = startScripts.classpath
+    outputDir = startScripts.outputDir
+    applicationName = 'whoisExtra'
+    defaultJvmOpts = ["-Dlogback.configurationFile=MY_APP_HOME/logback-whois-extra.xml",
+                      "-Dconfig=MY_APP_HOME/config.properties", "-Dapp.home=MY_APP_HOME/", "-Xms512m", "-Xmx1024m"]
+
+    updateWhoisExtraRunApp {
+        doLast {
+            unixScript.text = unixScript.text.replace('MY_APP_HOME', '\$APP_HOME')
+            windowsScript.text = windowsScript.text.replace('MY_APP_HOME', '%~dp0..')
+        }
+    }
+}
+
+applicationDistribution.into("bin") {
+    duplicatesStrategy= DuplicatesStrategy.EXCLUDE
+    from(updateHostingExtraRunApp)
+    from(updateWhoisExtraRunApp)
+    fileMode = 0755
+}
+
+distZip {
+    archiveName 'analyzer.zip'
+}
