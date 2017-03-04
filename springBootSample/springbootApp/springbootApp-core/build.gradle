@@ -36,6 +36,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-freemarker")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-devtools")
+    //spring boot application run info access:http://localhost:8080/mappings
+    compile("org.springframework.boot:spring-boot-starter-actuator")
     //compile("org.springframework.boot:spring-boot-starter-security")
 }
 

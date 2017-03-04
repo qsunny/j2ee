@@ -9,6 +9,7 @@
 	<dubbo:registry id="zookeeper" protocol="zookeeper" address="${dubbo.registry.address}"
 		file="${dubbo.home}/output/dubbo.cache" />
 	<!-- 设置不依赖 -->
+	<!--今天发现服务没有打开，本地http://localhost:8080居然访问不到-->
 	<dubbo:consumer check="false" timeout="300000" />
 	<dubbo:provider timeout="300000" />
 	<dubbo:protocol name="dubbo" port="20885" dispather="all"	threadpool="cached" threads="5000" />
