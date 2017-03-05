@@ -1,0 +1,116 @@
+buildscript {
+    ext {
+        //1.3.5.RELEASE,1.4.4.RELEASE
+        springBootVersion = '1.4.4.RELEASE'
+    }
+    repositories {
+        mavenLocal()
+        maven {
+            url "http://192.168.1.112:8081/nexus/content/groups/public/"
+        }
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+        maven { url"https://repo.spring.io/libs-release" }
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "io.spring.gradle:dependency-management-plugin:0.4.0.RELEASE"
+    }
+}
+
+allprojects {
+    apply plugin: 'java'
+
+    // JDK 8
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    // 全局属性设置
+    ext {
+        // java文件编码方式设置为utf-8
+        compileJava.options.encoding = 'UTF-8'
+        compileTestJava.options.encoding = 'UTF-8'
+        javadoc.options.encoding = 'utf-8'
+    }
+
+    repositories {
+        //使用Maven本地缓存
+        mavenLocal()
+        maven {
+            credentials {
+                username 'aaron'
+                password 'aaron123'
+            }
+            url "http://192.168.1.112:8081/nexus/content/groups/public/"
+        }
+        /*
+        def REPOSITORY_URL = 'http://maven.aliyun.com/nexus/content/groups/public/'
+        all { ArtifactRepository repo ->
+            def url = repo.url.toString()
+            if ((repo instanceof MavenArtifactRepository) && (url.startsWith('https://repo1.maven.org/maven2') || url.startsWith('https://jcenter.bintray.com'))) {
+                project.logger.lifecycle 'Repository ${repo.url} replaced by $REPOSITORY_URL .'
+                remove repo
+            }
+        }
+        */
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+        maven {
+            url "http://repo1.maven.org/maven2"
+        }
+        maven {
+            url "https://repo.spring.io/libs-release"
+        }
+        maven { url 'http://repo.spring.io/snapshot' }
+        maven { url "http://repo.spring.io/milestone" }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+            url "http://repository.jboss.org/nexus/content/groups/public/"
+            name = "jboss"
+        }
+        jcenter()
+        mavenCentral()
+    }
+
+}
+
+subprojects {
+    apply plugin: 'idea'
+    apply plugin: "io.spring.dependency-management"
+
+
+    dependencyManagement {
+        imports {
+            mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Camden.SR5'
+        }
+    }
+
+    /*
+    dependencyManagement {
+        imports {
+            mavenBom 'org.springframework.cloud:spring-cloud-starter-parent:1.0.0.RELEASE'
+        }
+    }
+    */
+
+    dependencies {
+        testCompile 'junit:junit:4.12'
+        //compile 'org.springframework.cloud:spring-cloud-starter-config'
+        //testCompile('org.springframework.boot:spring-boot-starter-test')
+    }
+
+    version '1.0.0-SNAPSHOT'
+    //version '1.0.0-RELEASE'
+
+    jar {
+        manifest.attributes provider: 'springcloud'
+    }
+
+}

@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: HelloService
+
+server:
+  port: 8092

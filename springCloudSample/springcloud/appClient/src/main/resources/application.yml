@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: appClient
+
+server:
+  port: 8888
+
+HelloService:
+  ribbon:
+    eureka:
+      enabled: false
+    listOfServers: localhost:8090,localhost:9091,localhost:8092
+    ServerListRefreshInterval: 15000
