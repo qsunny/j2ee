@@ -107,6 +107,7 @@ ext {
 dependencies {
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
 
+	compile "commons-io:commons-io:2.5"
 	compile "commons-lang:commons-lang:2.6"
 	compile "org.springframework:spring-context:$springVersion"
 	compile "org.springframework:spring-web:$springVersion"
