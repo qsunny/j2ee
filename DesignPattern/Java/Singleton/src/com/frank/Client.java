@@ -16,5 +16,8 @@ public class Client {
             sgt.doSomething();
         }
 
+    // 使用
+    SingleInstance.INSTANCE.fun1();
+
     }
 }

@@ -1,0 +1,9 @@
+bin
+.gradle
+.settings
+build
+.project
+.classpath
+.idea
+toysproject
+out
