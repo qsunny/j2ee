@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--导入JavaFXML类-->
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<!--布局控件BorderPane，fx:controller属性用于声明事件处理的Controller，值为Controller类的类全名-->
+<!--xmlns用于声明默认命名空间，这里的声明随着你安装的Java JDK版本号的不同可以不同，但是最好不要比你安装的JDK版本高-->
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="com.aaron.Controller">
+<center>
+   <!--声明一个Button元素，fx:id用于给该Button一个标示，用于和Controller类中的Button实例进行绑定-->
+   <!--onAction用于绑定Button的点击事件，handleButtonAction前面的#用于和Controller中处理函数进行绑定-->
+   <Button fx:id="btnHello" text="Hello World!" BorderPane.alignment="CENTER" onAction="#handleButtonAction">
+      <!--这里我修改了Button默认的字体及其大小-->
+      <font>
+         <Font name="Arial" size="14.0" />
+      </font>
+   </Button>
+</center>
+</BorderPane>
