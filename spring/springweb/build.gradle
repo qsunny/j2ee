@@ -57,5 +57,6 @@ subprojects {
     jar {
         manifest.attributes provider: 'springweb'
     }
+    
 
 }
