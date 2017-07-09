@@ -32,8 +32,13 @@ public class SampleController {
 	@ResponseBody
 	@RequestMapping("/getUser")
 	public User getUser(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("receive param test===="+request.getParameter("test"));
-		System.out.println("receive param test2===="+request.getParameter("test2"));
+		System.out.println("receive param cell_name===="+request.getParameter("cell_name"));
+		System.out.println("receive param thickness===="+request.getParameter("thickness"));
+		System.out.println("receive param range===="+request.getParameter("range"));
+		System.out.println("receive param times===="+request.getParameter("times"));
+		System.out.println("receive param result===="+request.getParameter("result"));
+		System.out.println("receive param packageno===="+request.getParameter("package_no"));
+
 		User u = new User();
 		u.setAge(23);
 		u.setFavorite(new String[]{"basketball","football","music"});
