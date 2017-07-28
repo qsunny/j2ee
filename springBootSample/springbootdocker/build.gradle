@@ -1,4 +1,4 @@
-group 'com.aaron'
+group 'dockertest'
 
 buildscript {
     repositories {
