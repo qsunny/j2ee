@@ -1,0 +1,180 @@
+group 'com.aaron'
+
+buildscript {
+    repositories {
+        mavenLocal()
+        maven {
+            url "http://120.25.156.197:8081/nexus/content/groups/public/"
+        }
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+        maven { url"https://repo.spring.io/libs-release" }
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+        jcenter()
+    }
+    dependencies {
+        //classpath "org.springframework.boot:spring-boot-gradle-plugin:1.4.0.RELEASE"
+        //classpath "org.springframework:springloaded:1.2.6.RELEASE"
+    }
+}
+
+ext {
+    // 设置脚本地址
+    gradleScriptDir = "${rootProject.projectDir}/gradle"
+
+}
+
+apply plugin: "idea"
+apply plugin: 'application'
+
+idea {
+    module {
+        inheritOutputDirs = false
+        outputDir = file("$buildDir/classes/main/")
+        testOutputDir = file("$buildDir/classes/test/")
+    }
+}
+
+allprojects {
+    apply plugin: 'java'
+
+    // JDK 8
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    // 全局属性设置
+    ext {
+        // java文件编码方式设置为utf-8
+        compileJava.options.encoding = 'UTF-8'
+        compileTestJava.options.encoding = 'UTF-8'
+        javadoc.options.encoding = 'utf-8'
+    }
+
+    // 设置源代码路径
+    sourceSets {
+        main {
+            java {
+                srcDir "src/main/java"
+            }
+            resources {
+                srcDir "src/main/resources"
+                srcDir "src/main/java"
+                exclude "**/*.java"
+               // exclude "config.properties"
+            }
+        }
+
+        test {
+            java {
+                srcDir "src/test/java"
+            }
+            resources {
+                srcDir "src/test/resources"
+                srcDir "src/test/java"
+                exclude "**/*.java"
+            }
+        }
+    }
+
+    repositories {
+        //使用Maven本地缓存
+        mavenLocal()
+        maven {
+            credentials {
+                username 'deployment'
+                password 'deployment123'
+            }
+            url "http://120.25.156.197:8081/nexus/content/groups/public/"
+        }
+        /*
+        def REPOSITORY_URL = 'http://maven.aliyun.com/nexus/content/groups/public/'
+        all { ArtifactRepository repo ->
+            def url = repo.url.toString()
+            if ((repo instanceof MavenArtifactRepository) && (url.startsWith('https://repo1.maven.org/maven2') || url.startsWith('https://jcenter.bintray.com'))) {
+                project.logger.lifecycle 'Repository ${repo.url} replaced by $REPOSITORY_URL .'
+                remove repo
+            }
+        }
+        */
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+        maven {
+            url "http://repo1.maven.org/maven2"
+        }
+        maven {
+            url "https://repo.spring.io/libs-release"
+        }
+        maven { url 'http://repo.spring.io/snapshot' }
+        maven { url "http://repo.spring.io/milestone" }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+            url "http://repository.jboss.org/nexus/content/groups/public/"
+            name = "jboss"
+        }
+        jcenter()
+        mavenCentral()
+    }
+
+}
+
+dependencies {
+    compile 'org.freemarker:freemarker:2.3.18'
+    compile 'commons-io:commons-io:2.5'
+    compile 'commons-lang:commons-lang:2.6'
+    compile 'mysql:mysql-connector-java:5.1.39'
+    compile 'log4j:log4j:1.2.17'
+    //compile group: 'oracle', name: 'ojdbc6', version: '11.2.0.3'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+
+// 设置打包生成的 Jar 包信息
+jar {
+    baseName = 'mybatisGenerator'
+    version = '0.0.1'
+}
+
+task createDocs {
+    def docs = file("$buildDir/docs")
+    outputs.dir docs
+    doLast {
+        docs.mkdirs()
+        new File(docs, "readme.txt").write("Read me!")
+    }
+}
+
+/*
+task createConf {
+    def conf = file("$buildDir/conf")
+    outputs.dir conf
+    doLast {
+        conf.mkdirs()
+    }
+}
+*/
+
+
+//task copy(type: Copy) {
+//    from 'resources'
+//    into 'conf'
+//    include('**/*.properties')
+//}
+
+
+distributions {
+    main {
+        contents {
+            from(createDocs) {
+                into "docs"
+            }
+        }
+    }
+}
+
+applicationDefaultJvmArgs = ["-Dfile.encoding=utf-8"]
+mainClassName = "com.aaron.mybatisgenerator.core.MyCodeGenerator"
