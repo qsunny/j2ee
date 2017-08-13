@@ -63,6 +63,22 @@ public class Cookies {
     }
 
     /**
+     * Put cookie to the client
+     * @param response 输出
+     * @param name Cookie的名字
+     * @param value Cookie的值
+     * @param domain Cookie域名
+     */
+    public static void put(HttpServletResponse response,
+                           String name,
+                           String value,
+                           String domain) {
+        System.out.println("==========="+name+"="+value);
+        put(response,name,value,"/",iDefaultValidSecond,domain);
+    }
+
+
+    /**
      * 设定一个Cookie,有生存时间设定,单位为秒
      * @param response 输出
      * @param name  Cookie的名称
@@ -89,6 +105,26 @@ public class Cookies {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+    }
+
+    /**
+     *
+     * @param response
+     * @param name
+     * @param value
+     * @param path
+     * @param ttl 秒
+     */
+    public static void put(HttpServletResponse response, String name,String value,String path,int ttl,String domain) {
+        try {
+            Cookie cookie = new Cookie(name, encode(value));
+            cookie.setPath(path);
+            cookie.setMaxAge(ttl); // 365天的秒数:31536000
+            cookie.setDomain(domain);
+            response.addCookie(cookie);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -123,6 +159,15 @@ public class Cookies {
      */
     public static void remove(HttpServletResponse response, String name) {
         put(response, name, null, 0);
+    }
+
+    /**
+     * 清除Cookie
+     * @param response HttpServletResponse
+     * @param name String
+     */
+    public static void remove(HttpServletResponse response, String name,String domain) {
+        put(response, name, null, "/",0,domain);
     }
 
     /**
