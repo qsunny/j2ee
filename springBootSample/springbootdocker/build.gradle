@@ -78,9 +78,35 @@ dependencies {
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
-task buildDocker(type: Docker, dependsOn: build) {
+/**命令使用 gradle clean buildApp -Penv=prod
+ * gradle clean buildApp -Penv=test
+ * 修改版本号需要更改Dockerfile-test,Dockerfile-prod中对应jar的版本号
+ */
+task buildApp(dependsOn: build) {
+    //println "$project.env"
+    //println project.env
+    if (project.hasProperty('env')&&"prod".equals(project.env)) {
+        project.version = '1.0.1-RELEASE'
+    } else {
+        project.version = '1.0.1-SNAPSHOT'
+    }
+    println "$version"
+}
+
+/**
+ * gradle buildDocker -Penv=prod
+ * gradle buildDocker -Penv=test
+ */
+task buildDocker(type: Docker, dependsOn: buildApp) {
     applicationName = jar.baseName
-    dockerfile = file('src/main/docker/Dockerfile')
+    if (project.hasProperty('env')&&"prod".equals(project.env)) {
+        dockerfile = file('src/main/docker/Dockerfile-prod')
+    } else if(project.hasProperty('env')&&"test".equals(project.env)){
+        dockerfile = file('src/main/docker/Dockerfile-test')
+    } else {
+        dockerfile = file('src/main/docker/Dockerfile-dev')
+    }
+
     doFirst {
         copy {
             from jar
