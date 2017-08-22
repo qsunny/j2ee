@@ -1,12 +1,12 @@
-package com.ceacsz.dao.${model};
+package com.allchips.${model}.dao.${fLowerObjectName};
 
 import java.util.List;
 import org.springframework.stereotype.Repository;
 import com.allchips.tools.pager.PagerModel;
 import com.allchips.tools.pager.Query;
 import com.allchips.tools.template.MybatisTemplate;
-import com.allchips.${model}.common.bean.${objectName};
-import com.allchips.${model}.core.dao.I${objectName}Dao;
+import com.allchips.${model}.api.bean.${objectName};
+import com.allchips.${model}.core.dao.${fLowerObjectName}.I${objectName}Dao;
 
 /**
  * <p>I${objectName}Dao接口实现类</p>

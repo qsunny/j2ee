@@ -1,4 +1,4 @@
-package com.ceacsz.dao.${model};
+package com.allchips.${model}.service.${fLowerObjectName};
 
 
 import javax.annotation.Resource;
@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import com.allchips.common.base.page.Page;
-import com.allchips.${model}.common.bean.${objectName};
-import com.allchips.${model}.core.dao.I${objectName}Dao;
+import com.allchips.${model}.api.bean.${objectName};
+import com.allchips.${model}.core.dao.${fLowerObjectName}.I${objectName}Dao;
 
 /**
 * <p>I${objectName}Service接口实现类</p>

@@ -2,7 +2,7 @@ package com.ceacsz.dao.${model};
 
 import java.util.List;
 import com.allchips.common.base.page.Page;
-import com.allchips.${model}.common.bean.${objectName};
+import com.allchips.${model}.api.bean.${objectName};
 
 /**
 * <p>I${objectName}Service接口</p>

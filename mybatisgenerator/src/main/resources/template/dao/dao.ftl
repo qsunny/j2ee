@@ -2,7 +2,7 @@ package com.ceacsz.dao.${model};
 
 import java.util.List;
 import com.allchips.common.base.page.Page;
-import com.allchips.${model}.common.bean.${objectName};
+import com.allchips.${model}.api.bean.${objectName};
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
