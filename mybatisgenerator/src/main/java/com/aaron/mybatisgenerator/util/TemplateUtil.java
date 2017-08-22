@@ -18,12 +18,15 @@ public class TemplateUtil
     {
         Configuration cfg = new Configuration();
         cfg.setDefaultEncoding("UTF-8");
-        File file = new File("template");
-//        if (!file.exists()) {
-//            file = new File(ClassLoader.getSystemResource("template").toURI());
-//        }
-//        cfg.setDirectoryForTemplateLoading(file);
-        cfg.setClassForTemplateLoading(TemplateUtil.class, "/template");
+        //File file = new File("template");
+        File file = new File("src/main/resources/template");
+        //System.out.println("file exist=="+file.exists());
+        if (!file.exists()) {
+            //file = new File(ClassLoader.getSystemResource("src/main/resources/template").toURI());
+            cfg.setClassForTemplateLoading(TemplateUtil.class, "/template/");
+        } else {
+            cfg.setDirectoryForTemplateLoading(file);
+        }
 
         cfg.setObjectWrapper(new DefaultObjectWrapper());
         return cfg;

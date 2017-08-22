@@ -4,18 +4,18 @@ import com.aaron.mybatisgenerator.core.BaseInfo;
 import com.aaron.mybatisgenerator.core.ColumnField;
 import com.aaron.mybatisgenerator.core.FileList;
 import com.aaron.mybatisgenerator.core.JdbcTypeNameTranslator;
+
+import java.io.*;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 import com.aaron.mybatisgenerator.util.*;
+import com.google.common.io.Resources;
 import org.apache.commons.lang.StringUtils;
 
 public class MyCodeGenerator
@@ -23,8 +23,24 @@ public class MyCodeGenerator
     public static void main(String[] args)
             throws Exception
     {
+        //System.out.println("commandline params:"+Arrays.toString(args));
         MyCodeGenerator cg = new MyCodeGenerator();
         cg.generate();
+        //BufferedInputStream bufferedInputStream = (BufferedInputStream)Resources.getResource("template/domain/domain.ftl").getContent();
+//        File file = new File("src/main/resources/template/domain/domain.ftl");
+//        InputStream in = new FileInputStream(file);
+        //InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("/template/domain/domain.ftl");
+//        InputStreamReader isr = new InputStreamReader(in);
+//        BufferedReader br = new BufferedReader(isr);
+//        String str = br.readLine();
+//        while(str!=null||!"".equals(str)) {
+//            System.out.println(str);
+//            str = br.readLine();
+//            if(str==null) break;
+//        }
+//        br.close();
+//        isr.close();
+//        in.close();
     }
 
     private String getField(String column)
@@ -52,17 +68,18 @@ public class MyCodeGenerator
     {
         BaseInfo baseInfo = new BaseInfo();
         Connection connection = null;
+        PropertiesUtil propertiesUtil = new PropertiesUtil();
         try
         {
-            String driver = PropertiesUtil.getProperties("jdbc.driver");
-            String url = PropertiesUtil.getProperties("jdbc.url");
-            String userName = PropertiesUtil.getProperties("jdbc.userName");
-            String password = PropertiesUtil.getProperties("jdbc.password");
-            String tableName = PropertiesUtil.getProperties("tableName");
-            String author = PropertiesUtil.getProperties("author");
-            String model = PropertiesUtil.getProperties("model");
-            String objectName = PropertiesUtil.getProperties("objectName");
-            String fLowerObjectName = PropertiesUtil.getProperties("fLowerObjectName");
+            String driver = propertiesUtil.getProperties("jdbc.driver");
+            String url = propertiesUtil.getProperties("jdbc.url");
+            String userName = propertiesUtil.getProperties("jdbc.userName");
+            String password = propertiesUtil.getProperties("jdbc.password");
+            String tableName = propertiesUtil.getProperties("tableName");
+            String author = propertiesUtil.getProperties("author");
+            String model = propertiesUtil.getProperties("model");
+            String objectName = propertiesUtil.getProperties("objectName");
+            String fLowerObjectName = propertiesUtil.getProperties("fLowerObjectName");
 
             connection = JdbcUtil.getConnection(driver, url, userName, password);
             Statement statement = connection.createStatement();
