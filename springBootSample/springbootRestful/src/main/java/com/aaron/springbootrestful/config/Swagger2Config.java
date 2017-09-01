@@ -24,14 +24,18 @@ public class Swagger2Config {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.aaron.springbootrestful.controller"))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+				.directModelSubstitute(org.joda.time.LocalDate.class, java.sql.Date.class)
+                .directModelSubstitute(org.joda.time.DateTime.class, java.util.Date.class);
     }
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("Spring Boot中使用Swagger2构建RESTful APIs")
                 .description("更多Spring Boot相关文章请关注：https://github.com/qsunny")
+				.license("Apache 2.0")
+                .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
                 .termsOfServiceUrl("https://github.com/qsunny")
-                .contact("aaron")
+                .contact(new Contact("aaron.qiu","https://github.com/qsunny","qsunny2004@gmail.com"))
                 .version("1.0")
                 .build();
     }
