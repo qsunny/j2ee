@@ -1,0 +1,120 @@
+group 'dockertest'
+
+buildscript {
+    repositories {
+        mavenLocal()
+        maven {
+            url "http://120.25.156.197:8081/nexus/content/groups/public/"
+        }
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+        maven { url"https://repo.spring.io/libs-release" }
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.4.RELEASE")
+        classpath('se.transmode.gradle:gradle-docker:1.2')
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'docker'
+
+jar {
+    baseName = 'springbootdocker'
+    version =  '1.0.0-SNAPSHOT'
+}
+
+repositories {
+    //使用Maven本地缓存
+    mavenLocal()
+    maven {
+        credentials {
+            username 'deployment'
+            password 'deployment123'
+        }
+        url "http://120.25.156.197:8081/nexus/content/groups/public/"
+    }
+    maven {
+        url "http://maven.aliyun.com/nexus/content/groups/public/"
+    }
+    maven {
+        url "http://repo1.maven.org/maven2"
+    }
+    maven {
+        url "https://repo.spring.io/libs-release"
+    }
+    maven { url 'http://repo.spring.io/snapshot' }
+    maven { url "http://repo.spring.io/milestone" }
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+    maven {
+        url "http://repository.jboss.org/nexus/content/groups/public/"
+        name = "jboss"
+    }
+    jcenter()
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// 全局属性设置
+ext {
+    // java文件编码方式设置为utf-8
+    compileJava.options.encoding = 'UTF-8'
+    compileTestJava.options.encoding = 'UTF-8'
+    javadoc.options.encoding = 'utf-8'
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+/**命令使用 gradle clean buildApp -Penv=prod
+ * gradle clean buildApp -Penv=test
+ * 修改版本号需要更改Dockerfile-test,Dockerfile-prod中对应jar的版本号
+ */
+task buildApp(dependsOn: build) {
+    //println "$project.env"
+    //println project.env
+    if (project.hasProperty('env')&&"prod".equals(project.env)) {
+        project.version = '1.0.1-RELEASE'
+    } else {
+        project.version = '1.0.1-SNAPSHOT'
+    }
+    println "$version"
+}
+
+/**
+ * gradle buildDocker -Penv=prod
+ * gradle buildDocker -Penv=test
+ */
+task buildDocker(type: Docker, dependsOn: buildApp) {
+    applicationName = jar.baseName
+    if (project.hasProperty('env')&&"prod".equals(project.env)) {
+        dockerfile = file('src/main/docker/Dockerfile-prod')
+    } else if(project.hasProperty('env')&&"test".equals(project.env)){
+        dockerfile = file('src/main/docker/Dockerfile-test')
+    } else {
+        dockerfile = file('src/main/docker/Dockerfile-dev')
+    }
+
+    doFirst {
+        copy {
+            from jar
+            into stageDir
+        }
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14.1'
+}

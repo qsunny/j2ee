@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 /**
+ * http://localhost:8080/swagger-ui.html
  * Created by Aaron.Qiu on 2017/7/9.
  */
 @RestController
