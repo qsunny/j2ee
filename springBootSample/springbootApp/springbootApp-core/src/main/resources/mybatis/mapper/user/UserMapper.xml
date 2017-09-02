@@ -6,6 +6,7 @@
         <result column="id" property="id" jdbcType="VARCHAR" />
 
         <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
 
         <result column="age" property="age" jdbcType="SMALLINT" />
     </resultMap>
@@ -13,17 +14,21 @@
     <sql id="Base_Column_List" >
         id,
         username,
+        password,
         age
     </sql>
 
     <sql id="where">
-        <if test="id!=null and id!=''">
+        <if test="id!=null">
             and id = #{id,jdbcType=VARCHAR}
         </if>
-        <if test="username!=null and username!=''">
+        <if test="username!=null">
             and username = #{username,jdbcType=VARCHAR}
         </if>
-        <if test="age!=null and age!=''">
+        <if test="password!=null">
+            and password = #{password,jdbcType=VARCHAR}
+        </if>
+        <if test="age!=null">
             and age = #{age,jdbcType=SMALLINT}
         </if>
     </sql>
@@ -50,6 +55,7 @@
         values (
         #{id,jdbcType=VARCHAR},
         #{username,jdbcType=VARCHAR},
+        #{password,jdbcType=VARCHAR},
         #{age,jdbcType=SMALLINT}
         )
     </insert>
@@ -67,6 +73,9 @@
             </if>
             <if test="username != null" >
                 username = #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                password = #{password,jdbcType=VARCHAR},
             </if>
             <if test="age != null" >
                 age = #{age,jdbcType=SMALLINT}
