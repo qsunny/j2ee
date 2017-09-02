@@ -20,7 +20,7 @@ buildscript {
     maven { url "http://repo.spring.io/milestone" }
   }
   dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.1.RELEASE")
+      classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.4.RELEASE")
 	}
 }
 
@@ -80,7 +80,8 @@ configurations {
 // Apply the java plugin to add support for Java
 apply plugin:'idea'
 //apply plugin: 'war'
-apply plugin: 'spring-boot'
+//apply plugin: 'spring-boot'
+apply plugin: 'org.springframework.boot'
 
 dependencies {
     // The production code uses the SLF4J logging API at compile time
@@ -97,9 +98,10 @@ dependencies {
     testCompile("org.springframework.boot:spring-boot-starter-test")
     compile 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	compile 'javax.servlet:jstl'
+    compile 'joda-time:joda-time:2.9.4'
     compile 'io.springfox:springfox-swagger2:2.7.0'
     compile 'io.springfox:springfox-swagger-ui:2.7.0'
-	compile 'joda-time:joda-time:2.9.4'
+
     //compile 'javax.servlet.jsp:jsp-api:2.2'
     //compile 'javax.servlet:javax.servlet-api:3.1.0'
     //compile 'org.springframework.boot:spring-boot-starter-data-jpa:1.4.1.RELEASE'

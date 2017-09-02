@@ -1,5 +1,6 @@
 package com.aaron.springbootrestful;
 
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.SpringApplication;
@@ -21,7 +22,7 @@ public class Application {
 //    String home() {
 //        return "Hello World!";
 //    }
-	private static Log logger = LogFactory.getLog(Application.class);
+	private static final Log logger = LogFactory.getLog(Application.class);
 
 	@Bean
 	protected ServletContextListener listener() {
