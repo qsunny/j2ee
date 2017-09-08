@@ -21,7 +21,9 @@ public class User implements Serializable{
     
     
     private String username;
-    
+
+    private String password;
+
     /**
      * 
      */
@@ -57,10 +59,21 @@ public class User implements Serializable{
         this.age = age;
     }
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", age=" + age
-				+ "]";
-	}
-        
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", age=" + age +
+                '}';
+    }
 }

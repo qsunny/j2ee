@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aaron.springbootmybatisOrthodox.dao.UserDao" >
+    <resultMap id="BaseResultMap" type="User" >
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="age" property="age" jdbcType="SMALLINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+    id, username, password, age
+</sql>
+
+    <select id="getAll" resultMap="BaseResultMap"  >
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_user
+    </select>
+
+    <select id="getOne" parameterType="java.lang.String" resultMap="BaseResultMap" >
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM tbl_user
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="User" >
+        INSERT INTO
+        tbl_user
+        (id,username,password,age)
+        VALUES
+        (#{id},#{username}, #{password}, #{age})
+    </insert>
+
+    <update id="update" parameterType="User" >
+        UPDATE
+        tbl_user
+        SET
+        <if test="username != null">username = #{username},</if>
+        <if test="password != null">password = #{password},</if>
+        <if test="age != null">age = #{age}</if>
+        WHERE
+        id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String" >
+        DELETE FROM
+        tbl_user
+        WHERE
+        id =#{id}
+    </delete>
+</mapper>
