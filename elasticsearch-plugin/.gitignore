@@ -2,8 +2,7 @@ bin
 .gradle
 .settings
 build
-.project
 .classpath
+.project
+out
 .idea
-toysproject
-logs
