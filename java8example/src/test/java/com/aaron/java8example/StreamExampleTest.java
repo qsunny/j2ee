@@ -21,4 +21,14 @@ public class StreamExampleTest {
     public void testSteamDemostrate1() {
         streamExample.steamDemostrate1();
     }
+
+    @Test
+    public void testStreamFilterNull() {
+        streamExample.streamFilterNull();
+    }
+
+    @Test
+    public void testStreamFilterCondition() {
+        streamExample.streamFilterCondition();
+    }
 }
