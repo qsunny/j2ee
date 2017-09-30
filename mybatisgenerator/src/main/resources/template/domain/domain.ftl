@@ -30,8 +30,21 @@ public class ${objectName} implements Serializable{
     {
         this.${item.field} = <#if item.field??>${item.field}</#if>;
     }
-        
     </#list>
+
+    @Override
+    public String toString() {
+    return "${objectName}{" +
+    <#list columnFieldList as item>
+    <#if item_index==0>
+        "<#if item.field??>${item.field}</#if>=" + <#if item.field??>${item.field}</#if> +
+    <#else>
+    ", <#if item.field??>${item.field}</#if>=" + <#if item.field??>${item.field}</#if> +
+    </#if>
+    </#list>
+    '}';
+    }
+
     </#if>
 
 }

@@ -17,7 +17,17 @@
         </#list>
         </#if>
     </sql>
-    
+
+    <sql id="normalWhere">
+    <#if columnFieldList??>
+        <#list columnFieldList as item>
+        <if test="${item.field}!=null">
+            and ${item.column} = ${"#{"}${item.field},jdbcType=${item.jdbcType}${"}"}
+        </if>
+		</#list>
+    	</#if>
+    </sql>
+
     <sql id="where">
         <#if columnFieldList??>
         <#list columnFieldList as item>
@@ -37,7 +47,7 @@
     
     <select id="getAll" parameterType="${objectName}" resultMap="${objectName}Map">
         select * from ${tableName} where 1=1 
-        <include refid="where" />
+        <include refid="normalWhere" />
     </select>
     
     <select id="getPagerModelByQuery" parameterType="${objectName}" resultMap="${objectName}Map">
@@ -47,7 +57,7 @@
     
     <select id="getByPageCount" parameterType="${objectName}" resultType="int">
         select count(1) from ${tableName} where 1=1 
-        <include refid="where" />
+        <include refid="normalWhere" />
     </select>
    
     <insert id="insert${objectName}" parameterType="${objectName}" >

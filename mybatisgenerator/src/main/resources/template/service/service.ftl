@@ -22,14 +22,14 @@ public interface I${objectName}Service {
 
 	/**
 	* 根据条件查询${objectName}列表
-	* @param ${objectName?lower_case}
+	* @param ${fLowerObjectName}
 	* @return 返回${objectName}列表
 	*/
 	public List<${objectName}> getAll(${objectName} ${fLowerObjectName}) throws Exception;
 
 	/**
 	* 根据条件分页查询${objectName}列表
-	* @param ${objectName?lower_case}
+	* @param ${fLowerObjectName}
 	* @param page
 	* @return 返回${objectName}列表
 	*/
@@ -37,7 +37,7 @@ public interface I${objectName}Service {
 
 	/**
 	* 添加${objectName}对象
-	* @param ${objectName?lower_case}
+	* @param ${fLowerObjectName}
 	* @return 返回添加成功的记录条数
 	*/
 	public int insert${objectName}(${objectName} ${fLowerObjectName}) throws Exception;
@@ -51,7 +51,7 @@ public interface I${objectName}Service {
 
 	/**
 	* 根据${objectName}id删除${objectName}对象
-	* @param ${objectName?lower_case}
+	* @param ${fLowerObjectName}
 	* @return 返回修改${objectName}成功的记录条数
 	*/
 	public int update${objectName}(${objectName} ${fLowerObjectName}) throws Exception;

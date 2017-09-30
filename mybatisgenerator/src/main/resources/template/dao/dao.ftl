@@ -43,7 +43,7 @@ public interface I${objectName}Dao {
 
 	/**
 	 * 添加${objectName}对象
-	 * @param ${objectName?lower_case}
+	 * @param ${fLowerObjectName}
 	 * @return 返回添加成功的记录条数
 	 * @throws Exception
 	 */
@@ -59,7 +59,7 @@ public interface I${objectName}Dao {
 
 	/**
 	* 根据${objectName}id删除${objectName}对象
-	* @param ${objectName?lower_case}
+	* @param ${fLowerObjectName}
 	* @return 返回修改${objectName}成功的记录条数
 	* @throws Exception
 	*/
