@@ -282,4 +282,21 @@ public class CommUtils {
     	return 0;
     }
 	
+	/**
+     * 获取到多少天后的日期
+     * @return
+     */
+    public static Date getDateAfterDays(int days) {
+        LocalDateTime timePoint = LocalDateTime.now();
+        System.out.println(timePoint);
+        // 3 years, 2 months, 1 day
+        Period period1 = Period.of(0, 0, days);
+        timePoint = timePoint.plus(period1);
+
+        ZoneId zone = ZoneId.systemDefault();
+        Instant instant = timePoint.atZone(zone).toInstant();
+        Date date = Date.from(instant);
+        return date;
+    }
+	
 }
