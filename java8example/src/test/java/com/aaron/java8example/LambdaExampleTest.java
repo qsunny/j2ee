@@ -99,4 +99,13 @@ public class LambdaExampleTest {
         optional.ifPresent((s) -> System.out.println(s.charAt(0)));     // "b"
     }
 
+    @Test
+    public void testComparator2() {
+        Comparator<Person> comparator = (p1, p2) -> p1.getAge().compareTo(p2.getAge());
+        Person p1 = new Person("aaron",27);
+        Person p2 = new Person("andoni",29);
+
+        System.out.println(comparator.compare(p1,p2));
+    }
+
 }
