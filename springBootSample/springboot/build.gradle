@@ -2,7 +2,8 @@ buildscript {
   repositories {
   //使用Maven本地缓存
 	mavenLocal()
-	maven {
+	maven {url "http://120.25.156.197:8081/nexus/content/groups/public/"}
+    maven {
 		/*
 		credentials {
 			username 'aaron'

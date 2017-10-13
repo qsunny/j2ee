@@ -1,7 +1,11 @@
 package com.example.springboot.web;
 
 import com.example.springboot.bean.User;
+import com.example.springboot.config.AppProperties;
+import com.example.springboot.config.GlobalProperties;
 import com.example.springboot.service.HelloWorldService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -16,6 +20,20 @@ import java.util.Map;
 //@RestController 
 @Controller
 public class SampleController {
+
+	private static final Logger logger = LoggerFactory.getLogger(SampleController.class);
+	private AppProperties app;
+	private GlobalProperties global;
+
+	@Autowired
+	public void setApp(AppProperties app) {
+		this.app = app;
+	}
+
+	@Autowired
+	public void setGlobal(GlobalProperties global) {
+		this.global = global;
+	}
 	
 	@Value("${application.message:Hello World}")
 	private String message = "Hello World";
@@ -51,7 +69,15 @@ public class SampleController {
 	public String welcome(Map<String, Object> model) {
 		System.out.println("===========dddddddddddd");
 		model.put("time", new Date());
-		model.put("message", this.message);
+		//model.put("message", this.message);
+
+
+		String appProperties = app.toString();
+		String globalProperties = global.toString();
+
+		logger.debug("Welcome {}, {}", app, global);
+
+		model.put("message", appProperties + globalProperties);
 		return "welcome";
 	}
 	
