@@ -3,6 +3,7 @@ apply plugin: 'spring-boot'
 ext {
     springVersion="4.3.3.RELEASE"
     mybatisSpringVersion="1.1.1"
+    jettyVersion="9.2.22.v20170606"
 }
 
 dependencies {
@@ -43,6 +44,13 @@ dependencies {
     //spring boot application run info access:http://localhost:8080/mappings
     compile("org.springframework.boot:spring-boot-starter-actuator")
     //compile("org.springframework.boot:spring-boot-starter-security")
+
+    compile "com.xuxueli:xxl-job-core:1.8.2"
+    compile "org.eclipse.jetty:jetty-server:$jettyVersion"
+    compile "org.eclipse.jetty:jetty-util:$jettyVersion"
+    compile "org.eclipse.jetty:jetty-http:$jettyVersion"
+    compile "org.eclipse.jetty:jetty-io:$jettyVersion"
+
 }
 
 

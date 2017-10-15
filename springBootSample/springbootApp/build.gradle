@@ -71,7 +71,10 @@ allprojects {
             name = "jboss"
         }
 		jcenter()
-		mavenCentral()					
+		mavenCentral()
+        maven {
+            url "http://repo1.maven.org/maven2/com/xuxueli/xxl-job-core/"
+        }
     }
 	
 }

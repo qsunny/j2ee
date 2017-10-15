@@ -2,12 +2,18 @@ package com.aaron.springbootApp.web.exception;
 
 import com.aaron.springbootApp.exception.ErrorInfo;
 import com.aaron.springbootApp.exception.SpringbootAppException;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
+import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DecimalFormat;
 
 /**
  * Created by Aaron.Qiu on 2016/12/3.
@@ -26,7 +32,7 @@ public class GlobalExceptionHandler {
             errorInfo.setMessage("Uploaded file is too large.  File size cannot exceed " + maxFileSize + ".");
         }
 
-        errorInfo.setCode(BaseResponse.ERROR_RESULT.getResponseCode());
+        errorInfo.setCode(500);
         errorInfo.setData(req.getRequestURL().toString());
         return errorInfo;
     }
