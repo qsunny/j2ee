@@ -31,4 +31,9 @@ public class StreamExampleTest {
     public void testStreamFilterCondition() {
         streamExample.streamFilterCondition();
     }
+
+    @Test
+    public void testMergeTwoStreams() {
+        streamExample.mergeTwoStreams();
+    }
 }

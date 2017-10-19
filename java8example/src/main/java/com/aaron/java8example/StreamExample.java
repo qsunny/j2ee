@@ -146,7 +146,7 @@ public class StreamExample {
         System.out.println(Arrays.toString(arr));
     }
 
-    public void convertStringArr() {
+    public static void convertStringArr() {
         String[] stringArr = { "a", "b", "c", "d" };
         Stream<String> stream = Stream.of(stringArr);
         String[] arr = stream.toArray(size -> new String[size]);
@@ -155,5 +155,54 @@ public class StreamExample {
         //String[] arr = stream.toArray(String[]::new);
     }
 
+    public static  void mergeTwoStreams() {
+        String[] arr1 = { "a", "b", "c", "d" };
+        String[] arr2 = { "e", "f", "g" };
+        Stream<String> stream1 = Stream.of(arr1);
+        Stream<String> stream2 = Stream.of(arr2);
+
+        Stream<String> stream3 = Stream.concat(stream1, stream2);
+        String[] arr = stream3.toArray(String[]::new);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public static  void mergeStreams() {
+        String[] arr1 = { "a", "b", "c", "d" };
+        String[] arr2 = { "e", "f", "g" };
+        String[] arr3 = { "h", "i", "j" };
+        Stream<String> stream1 = Stream.of(arr1);
+        Stream<String> stream2 = Stream.of(arr2);
+        Stream<String> stream3 = Stream.of(arr3);
+
+        //use Stream.of(T... values)
+        Stream<String> stream = Stream.of(stream1, stream2, stream3).flatMap(x -> x);
+
+        String[] arr = stream.toArray(String[]::new);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public static  void mergeFilteredStreamToOther() {
+        String[] arr1 = { "abc", "bcd", "cdef", "defgh" };
+        String[] arr2 = { "af", "fg", "gh" };
+        Stream<String> stream1 = Stream.of(arr1);
+        Stream<String> stream2 = Stream.of(arr2);
+
+        Stream<String> stream3 = Stream.concat(stream1.filter(x -> x.length()<4), stream2);
+        String[] arr = stream3.toArray(String[]::new);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public static void mergerMoreThan2Streams() {
+        String[] arr1 = { "a", "b", "c", "d" };
+        String[] arr2 = { "e", "f", "g" };
+        String[] arr3 = { "h", "i", "j" };
+        Stream<String> stream1 = Stream.of(arr1);
+        Stream<String> stream2 = Stream.of(arr2);
+        Stream<String> stream3 = Stream.of(arr3);
+
+        Stream<String> stream = Stream.concat(Stream.concat(stream1, stream2), stream3);
+        String[] arr = stream.toArray(String[]::new);
+        System.out.println(Arrays.toString(arr));
+    }
 
 }

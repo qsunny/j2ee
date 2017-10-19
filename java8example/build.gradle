@@ -6,13 +6,16 @@ apply plugin: 'java'
 sourceCompatibility = 1.8
 
 repositories {
-	mavenLocal()		
+	mavenLocal()
 	maven {
 		credentials {
 			username 'aaron'
 			password 'aaron123'
 		}			
 		url "http://192.168.1.112:8081/nexus/content/groups/public/"		
+	}
+	maven {
+		url "http://repo1.maven.org/maven2"
 	}
 	maven {
 		url "http://maven.aliyun.com/nexus/content/groups/public/"
