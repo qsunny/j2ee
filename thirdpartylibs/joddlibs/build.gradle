@@ -1,0 +1,84 @@
+group 'com.aaron'
+version '1.0.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenLocal()
+        maven {
+            url "http://120.25.156.197:8081/nexus/content/groups/public/"
+        }
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+        maven { url "https://repo.spring.io/libs-release" }
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+        jcenter()
+    }
+    dependencies {
+    }
+}
+
+allprojects {
+    apply    plugin: 'java'
+
+    // JDK 8
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    // 全局属性设置
+    ext {
+        // java文件编码方式设置为utf-8
+        compileJava.options.encoding = 'UTF-8'
+        compileTestJava.options.encoding = 'UTF-8'
+        javadoc.options.encoding = 'utf-8'
+    }
+
+    /*@SuppressWarnings("unchecked")*/
+    tasks.withType(JavaCompile) {
+        options.deprecation = false
+        options.compilerArgs += ["-XDignore.symbol.file", "-Xdoclint:none", "-Xlint:unchecked", "-Xlint:deprecation", "-nowarn"]
+    }
+
+
+    repositories {
+        //使用Maven本地缓存
+        mavenLocal()
+        maven {
+            credentials {
+                username 'deployment'
+                password 'deployment123'
+            }
+            url "http://120.25.156.197:8081/nexus/content/groups/public/"
+        }
+
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+        maven {
+            url "http://repo1.maven.org/maven2"
+        }
+        maven {
+            url "https://repo.spring.io/libs-release"
+        }
+        maven { url 'http://repo.spring.io/snapshot' }
+        maven { url "http://repo.spring.io/milestone" }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+            url "http://repository.jboss.org/nexus/content/groups/public/"
+            name = "jboss"
+        }
+        maven {url "http://repo1.maven.org/maven2/com/xuxueli/xxl-job-core/"}
+        maven { url "https://jitpack.io" }
+        jcenter()
+        mavenCentral()
+    }
+
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+    compile group: 'org.jodd', name: 'jodd', version: '3.4.1', ext: 'pom'
+}
