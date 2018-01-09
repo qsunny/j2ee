@@ -2,10 +2,13 @@ group 'com.aaron'
 version '1.0.0-SNAPSHOT'
 
 buildscript {
+    ext {
+        springBootVersion = '1.5.4.RELEASE'
+    }
     repositories {
         mavenLocal()
         maven {
-            url "http://120.25.156.197:8081/nexus/content/groups/public/"
+            url "http://192.168.1.112:8081/nexus/content/groups/public/"
         }
         maven {
             url "http://maven.aliyun.com/nexus/content/groups/public/"
@@ -16,7 +19,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.4.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
 
@@ -25,8 +28,14 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
 jar {
-    baseName = 'springbootmail'
+    baseName = 'imagemetadata'
     version =  '1.0.0-SNAPSHOT'
+    manifest {
+        attributes("Implementation-Title": "Gradle",
+                "Implementation-Version": version,
+                "Main-Class": "com.daftano.metadata.MetadataApplication"
+        )
+    }
 }
 
 repositories {
@@ -37,7 +46,7 @@ repositories {
             username 'deployment'
             password 'deployment123'
         }
-        url "http://120.25.156.197:8081/nexus/content/groups/public/"
+        url "http://192.168.1.112:8081/nexus/content/groups/public/"
     }
     maven {
         url "http://maven.aliyun.com/nexus/content/groups/public/"
@@ -73,14 +82,15 @@ ext {
 }
 
 dependencies {
-    //compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.boot:spring-boot-starter-mail")
-    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-    //compile("org.springframework.boot:spring-boot-devtools")
-    //compile("org.springframework.boot:spring-boot-starter-actuator")
-    //compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1")
-    //compile 'mysql:mysql-connector-java:5.1.38'
-    testCompile("org.springframework.boot:spring-boot-starter-test")
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-groovy-templates'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-logging'
+    compile group: 'org.slf4j', name: 'jcl-over-slf4j', version: '1.7.22'
+    compile group: 'com.drewnoakes', name: 'metadata-extractor', version: '2.10.0'
+    compile group: 'com.fasterxml.jackson.dataformat', name:'jackson-dataformat-xml', version: '2.6.3'
+
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
 }
 
 sourceSets {
@@ -94,7 +104,6 @@ sourceSets {
         }
     }
 }
-
 
 
 
