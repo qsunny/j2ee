@@ -210,6 +210,10 @@ public class CommUtils {
 	}
 	
     /**
+	 * proxy_set_header X-Real-IP $remote_addr;
+	 * proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	 * proxy_set_header Host $http_host;
+	 * proxy_set_header X-NginX-Proxy true;
      * 返回客户端IP地址
      * @param request HttpServletRequest
      * @return 客户端IP地址，若等于""，则表示取IP失败
@@ -217,14 +221,22 @@ public class CommUtils {
     public static String getRealRemoteIP(HttpServletRequest request){
         String ret = "";
         String cdnSrcIp = request.getHeader("Cdn-Src-Ip");
-        if(cdnSrcIp == null){
-            String ipNginx = request.getHeader("X_REAL_IP");
-            String ip = null;
-            if (ipNginx != null) {
-                ip = ipNginx;
-            } else {
-                ip = request.getRemoteAddr();
-            }
+        if(cdnSrcIp == null || cdnSrcIp.length()<= 0){
+            String ip = null;			
+			String ip = request.getHeader("X-forwarded-for");
+			if (ip = null || ip.length()<= 0 || "unknoun".equalsIgnoreCase(ip)) {
+				ip = request.getHeader("Proxy-Client-IP");
+			}
+			if (ip = null || ip.length()<= 0 || "unknoun".equalsIgnoreCase(ip)) {
+				ip = request.getHeader("WL-Proxy-Client-IP");
+			}
+			if (ip = null || ip.length()<= 0 || "unknoun".equalsIgnoreCase(ip)) {
+				ip = request.getHeader("X_REAL_IP");
+			}
+			
+			if (ip = null || ip.length()<= 0 || "unknoun".equalsIgnoreCase(ip)) {
+				ip = request.getRemoteAddr( );
+			}
             
             if (ip!=null) {
                 ret = ip;
@@ -239,7 +251,7 @@ public class CommUtils {
         }
         return ret;
     }
-    
+   
     /**
      * 获取密码的强、中、弱度
      * @param pwd 密码
