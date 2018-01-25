@@ -39,6 +39,10 @@ public class JsonUtils {
 	public static Object jsonToObj(String json, Class clazz) {
 		return getGson().fromJson(json, clazz);
 	}
+	
+	public static <T> T jsonToObject(String jsonStr, Class<T> clazz) {
+		return getGson().fromJson(jsonStr,clazz);
+	}
 
 	public static Gson getGson() {
 		GsonBuilder gsonBuilder = new GsonBuilder();
