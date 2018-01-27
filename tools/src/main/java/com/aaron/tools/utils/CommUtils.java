@@ -219,37 +219,36 @@ public class CommUtils {
      * @return 客户端IP地址，若等于""，则表示取IP失败
      */
     public static String getRealRemoteIP(HttpServletRequest request){
-        String ret = "";
-        String cdnSrcIp = request.getHeader("Cdn-Src-Ip");
-        if(cdnSrcIp == null || cdnSrcIp.length()<= 0){
-            String ip = null;			
+		String ret = "";
+		String cdnSrcIp = request.getHeader("Cdn-Src-Ip");
+		if(cdnSrcIp == null || cdnSrcIp.length()<= 0){
 			String ip = request.getHeader("X-forwarded-for");
-			if (ip = null || ip.length()<= 0 || "unknoun".equalsIgnoreCase(ip)) {
+			if (ip == null || ip.length()<= 0 || "unknoun".equalsIgnoreCase(ip)) {
 				ip = request.getHeader("Proxy-Client-IP");
 			}
-			if (ip = null || ip.length()<= 0 || "unknoun".equalsIgnoreCase(ip)) {
+			if (ip == null || ip.length()<= 0 || "unknoun".equalsIgnoreCase(ip)) {
 				ip = request.getHeader("WL-Proxy-Client-IP");
 			}
-			if (ip = null || ip.length()<= 0 || "unknoun".equalsIgnoreCase(ip)) {
+			if (ip == null || ip.length()<= 0 || "unknoun".equalsIgnoreCase(ip)) {
 				ip = request.getHeader("X_REAL_IP");
 			}
-			
-			if (ip = null || ip.length()<= 0 || "unknoun".equalsIgnoreCase(ip)) {
+
+			if (ip == null || ip.length()<= 0 || "unknoun".equalsIgnoreCase(ip)) {
 				ip = request.getRemoteAddr( );
 			}
-            
-            if (ip!=null) {
-                ret = ip;
-            }
-        }else {
-            ret = cdnSrcIp.trim();
-        }
-        
-        if(ret.startsWith("0:0:0:0:"))
-        {
-            ret = "127.0.0.1";
-        }
-        return ret;
+
+			if (ip!=null) {
+				ret = ip;
+			}
+		}else {
+			ret = cdnSrcIp.trim();
+		}
+
+		if(ret.startsWith("0:0:0:0:"))
+		{
+			ret = "127.0.0.1";
+		}
+		return ret;
     }
    
     /**
