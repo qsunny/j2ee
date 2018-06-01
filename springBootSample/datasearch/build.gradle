@@ -1,0 +1,112 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        maven {
+            url "http://192.168.1.112:8081/nexus/content/groups/public/"
+        }
+        maven {
+            url "http://120.25.156.197:8081/nexus/content/groups/public/"
+        }
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+        maven { url"https://repo.spring.io/libs-release" }
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+        jcenter()
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.0.2.RELEASE'
+    id 'java'
+}
+
+
+allprojects {
+    apply plugin: 'java'
+
+    // JDK 8
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    // 全局属性设置
+    ext {
+        // java文件编码方式设置为utf-8
+        compileJava.options.encoding = 'UTF-8'
+        compileTestJava.options.encoding = 'UTF-8'
+        javadoc.options.encoding = 'utf-8'
+    }
+
+    repositories {
+        //使用Maven本地缓存
+        mavenLocal()
+        maven {
+            credentials {
+                username 'aaron'
+                password 'aaron123'
+            }
+            url "http://192.168.1.112:8081/nexus/content/groups/public/"
+        }
+        maven {
+            url "http://120.25.156.197:8081/nexus/content/groups/public/"
+        }
+        /*
+        def REPOSITORY_URL = 'http://maven.aliyun.com/nexus/content/groups/public/'
+        all { ArtifactRepository repo ->
+            def url = repo.url.toString()
+            if ((repo instanceof MavenArtifactRepository) && (url.startsWith('https://repo1.maven.org/maven2') || url.startsWith('https://jcenter.bintray.com'))) {
+                project.logger.lifecycle 'Repository ${repo.url} replaced by $REPOSITORY_URL .'
+                remove repo
+            }
+        }
+        */
+        maven {
+            url "https://mirrors.huaweicloud.com/repository/maven/"
+            credentials {
+                username "anonymous"
+                password "devcloud"
+            }
+        }
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+        maven {
+            url "http://repo1.maven.org/maven2"
+        }
+        maven {
+            url "https://repo.spring.io/libs-release"
+        }
+        maven { url 'http://repo.spring.io/snapshot' }
+        maven { url "http://repo.spring.io/milestone" }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+            url "http://repository.jboss.org/nexus/content/groups/public/"
+            name = "jboss"
+        }
+        jcenter()
+        mavenCentral()
+        maven {
+            url "http://repo1.maven.org/maven2/com/xuxueli/xxl-job-core/"
+        }
+    }
+
+}
+
+subprojects {
+    apply plugin: 'idea'
+
+    dependencies {
+        testCompile 'junit:junit:4.12'
+    }
+
+    version '1.0.1-SNAPSHOT'
+    //version '1.0.0-RELEASE'
+
+    jar {
+        manifest.attributes provider: 'datasearch'
+    }
+
+}

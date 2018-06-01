@@ -1,0 +1,6 @@
+rootProject.name = 'datasearch'
+include 'datasearch-api'
+include 'datasearch-common'
+include 'datasearch-core'
+include 'datasearch-web'
+
