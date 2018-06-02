@@ -1,5 +1,5 @@
 apply plugin: 'org.springframework.boot'
-
+apply plugin: 'io.spring.dependency-management'
 dependencies {
     compile project(':datasearch-common')
     compile 'org.springframework.data:spring-data-elasticsearch'
