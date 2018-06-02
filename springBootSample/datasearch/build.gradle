@@ -28,6 +28,8 @@ plugins {
 
 allprojects {
     apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 
     // JDK 8
     sourceCompatibility = 1.8
