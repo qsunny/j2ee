@@ -19,6 +19,8 @@ configurations {
 
 dependencies {
     compile project(':springbootDemo-core')
+    implementation "org.springframework.boot:spring-boot-starter-jetty"
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation "org.springframework.boot:spring-boot-starter-test"
+
 }

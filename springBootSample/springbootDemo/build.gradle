@@ -5,7 +5,7 @@ buildscript {
     repositories {
         mavenLocal()
         maven {
-            url "http://120.25.156.197:8081/nexus/content/groups/public/"
+            url "http://192.168.1.111:8081/nexus/content/groups/public/"
         }
         maven {
             url "http://maven.aliyun.com/nexus/content/groups/public/"
@@ -48,9 +48,9 @@ allprojects {
         maven {
             credentials {
                 username 'deployment'
-                password 'deploy@allchps-369'
+                password ''
             }
-            url "http://120.25.156.197:8081/nexus/content/groups/public/"
+            url "http://192.168.1.111:8081/nexus/content/groups/public/"
         }
         /*
         def REPOSITORY_URL = 'http://maven.aliyun.com/nexus/content/groups/public/'
@@ -64,6 +64,11 @@ allprojects {
         */
         maven {
             url "http://maven.aliyun.com/nexus/content/groups/public/"
+            name = "阿里云"
+        }
+        maven {
+            url "https://mirrors.huaweicloud.com/repository/maven/"
+            name = "华为开源镜像库"
         }
         maven {
             url "http://repo1.maven.org/maven2"
@@ -80,6 +85,10 @@ allprojects {
             url "http://repository.jboss.org/nexus/content/groups/public/"
             name = "jboss"
         }
+        maven {
+            url "https://repository.jboss.org/nexus/content/repositories/releases/"
+            name = "jbossJBPM"
+        }
         jcenter()
         mavenCentral()
     }
@@ -90,11 +99,13 @@ subprojects {
     apply plugin: 'idea'
 
     dependencies {
-        testCompile 'junit:junit:4.12'
+        testCompileOnly 'org.junit.jupiter:junit-jupiter-api:5.0.1'
+        testCompileOnly 'org.junit.jupiter:junit-jupiter-engine:5.0.1'
+//        compile 'junit:junit:4.9'
     }
 
     version '1.0.0-SNAPSHOT'
-//    version '1.0.3-RELEASE'
+//    version '1.0.0-RELEASE'
 
     jar {
         manifest.attributes provider: 'springbootDemo'
