@@ -5,7 +5,7 @@ buildscript {
     repositories {
         mavenLocal()
         maven {
-            url "http://192.168.1.111:8081/nexus/content/groups/public/"
+            url "http://120.25.156.197:8081/nexus/content/groups/public/"
         }
         maven {
             url "http://maven.aliyun.com/nexus/content/groups/public/"

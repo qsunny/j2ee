@@ -40,4 +40,18 @@ public class SpringbootDemoController {
         }
         return resp;
     }
+
+    @RequestMapping(value="/user/info",method = RequestMethod.POST)
+    public GenericResp<User> getUser(HttpServletRequest request, HttpServletResponse response) {
+        GenericResp<User> resp = new GenericResp<>();
+        try {
+            System.out.println("============getUser===============");
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("getUser",e);
+        }
+        return resp;
+    }
 }
