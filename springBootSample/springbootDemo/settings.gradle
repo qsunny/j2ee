@@ -1,4 +1,4 @@
 rootProject.name = 'springbootDemo'
 include "springbootDemo-api","springbootDemo-common","springbootDemo-core","springbootDemo-web"
 
-//enableFeaturePreview('IMPROVED_POM_SUPPORT')
+enableFeaturePreview('IMPROVED_POM_SUPPORT')
