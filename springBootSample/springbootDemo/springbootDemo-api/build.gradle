@@ -90,8 +90,8 @@ publishing {
     repositories {
         maven {
             // change URLs to point to your repos, e.g. http://my.org/repo
-            def releasesRepoUrl = "http://192.168.1.111:8081/nexus/content/repositories/releases/"
-            def snapshotsRepoUrl = "http://192.168.1.111:8081/nexus/content/repositories/snapshots/"
+            def releasesRepoUrl = "http://192.168.1.101:8081/nexus/content/repositories/releases/"
+            def snapshotsRepoUrl = "http://192.168.1.101:8081/nexus/content/repositories/snapshots/"
             url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
             credentials {
                 username = 'deployment'
@@ -111,6 +111,7 @@ publishing {
         }
     }
 }
+
 
 
 javadoc {

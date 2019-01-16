@@ -1,6 +1,8 @@
-plugins {
-    id 'org.springframework.boot' version '2.1.1.RELEASE'
-}
+//plugins {
+//    id 'org.springframework.boot' version '2.1.2.RELEASE' apply false
+//    id "io.spring.dependency-management" version "1.0.6.RELEASE" apply false
+//}
+apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'docker'
 
@@ -8,9 +10,14 @@ apply plugin: 'docker'
 group = 'springbootDemo'
 
 jar {
+//    enabled = true
     baseName = 'springbootDemo-web'
     //version =  '0.0.1-SNAPSHOT'
 }
+
+//springBoot {
+//    mainClassName = 'com.aaron.springbootDemo.web.SpringbootDemoApp'
+//}
 
 configurations {
     compile.exclude module: "spring-boot-starter-tomcat"
@@ -21,6 +28,8 @@ dependencies {
     compile project(':springbootDemo-core')
     implementation "org.springframework.boot:spring-boot-starter-jetty"
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
 
 }
+
+

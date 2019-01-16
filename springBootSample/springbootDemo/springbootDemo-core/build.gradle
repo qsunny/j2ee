@@ -1,6 +1,9 @@
-plugins {
-    id 'org.springframework.boot' version '2.1.1.RELEASE'
-}
+//plugins {
+//    id 'org.springframework.boot' version '2.1.2.RELEASE' apply false
+//    id "io.spring.dependency-management" version "1.0.6.RELEASE" apply false
+//}
+//apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 dependencies {
@@ -19,13 +22,12 @@ dependencies {
     compile 'net.sf.json-lib:json-lib:2.4:jdk15'
     compile group: 'org.apache.commons', name: 'commons-pool2', version: '2.6.0'
     compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.7.4'
-    //XXL-JOB
+    compile 'commons-codec:commons-codec:1.10'
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+//    //XXL-JOB
     compile 'com.xuxueli:xxl-job-core:1.0.0-SNAPSHOT'
     compile "org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.2"
     compile "org.springframework.boot:spring-boot-starter-data-redis"
-
-
-
 }
 
 sourceSets {
@@ -33,7 +35,6 @@ sourceSets {
         java {
             srcDirs = ['src/main/java']
         }
-        //没错 我同时把resource指向了java目录 这样就可以收录java目录中的资源文件了
         resources {
             srcDirs = ['src/main/resources','src/main/java']
         }

@@ -29,7 +29,7 @@ import java.util.Properties;
  * StatementHandler对象的prepare方法，即调用invocation.proceed()。
  * 对于分页而言，在拦截器里面我们还需要做的一个操作就是统计满足当前条件的记录一共有多少，这是通过获取到了原始的Sql语句后，把它改为对应的统计语句再利用Mybatis封装好的参数和设
  * 置参数的功能把Sql语句中的参数进行替换，之后再执行查询记录数的Sql语句进行总记录数的统计。
- * 
+ *
  */
 @Intercepts({ @Signature(method = "prepare", type = StatementHandler.class, args = { Connection.class,Integer.class }) })
 public class PageInterceptor implements Interceptor {
@@ -124,7 +124,7 @@ public class PageInterceptor implements Interceptor {
 
 	/**
 	 * 获取Mysql数据库的分页查询语句
-	 * 
+	 *
 	 * @param page 分页对象
 	 * @param sqlBuffer 包含原sql语句的StringBuffer对象
 	 * @return Mysql数据库分页语句
@@ -138,7 +138,7 @@ public class PageInterceptor implements Interceptor {
 
 	/**
 	 * 获取Oracle数据库的分页查询语句
-	 * 
+	 *
 	 * @param page 分页对象
 	 * @param sqlBuffer 包含原sql语句的StringBuffer对象
 	 * @return Oracle数据库的分页查询语句
@@ -227,7 +227,7 @@ public class PageInterceptor implements Interceptor {
 	private static class ReflectUtil {
 		/**
 		 * 利用反射获取指定对象的指定属性
-		 * 
+		 *
 		 * @param obj 目标对象
 		 * @param fieldName 目标属性
 		 * @return 目标属性的值
@@ -251,7 +251,7 @@ public class PageInterceptor implements Interceptor {
 
 		/**
 		 * 利用反射获取指定对象里面的指定属性
-		 * 
+		 *
 		 * @param obj 目标对象
 		 * @param fieldName 目标属性
 		 * @return 目标字段
@@ -271,7 +271,7 @@ public class PageInterceptor implements Interceptor {
 
 		/**
 		 * 利用反射设置指定对象的指定属性为指定的值
-		 * 
+		 *
 		 * @param obj 目标对象
 		 * @param fieldName 目标属性
 		 * @param fieldValue 目标值
