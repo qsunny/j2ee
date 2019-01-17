@@ -1,0 +1,9 @@
+FROM frolvlad/alpine-oraclejdk8:slim
+#FROM fabric8/java-alpine-openjdk8-jdk
+VOLUME /tmp
+ARG JAR_FILE
+ADD ${JAR_FILE} app.jar
+ENV JAVA_OPTS="-Xms256m -Xmx512m -XX:+PrintFlagsFinal -XX:+PrintGCDetails"
+ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Dspring.profiles.active=dev -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
+EXPOSE 8081 20881 9981
+
