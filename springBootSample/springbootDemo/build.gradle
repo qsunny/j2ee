@@ -5,15 +5,16 @@ buildscript {
     repositories {
         mavenLocal()
         maven {
-            url "http://120.25.156.197:8081/nexus/content/groups/public/"
+            url "http://192.168.1.112:8081/nexus/content/groups/public/"
         }
         maven {
             url "http://maven.aliyun.com/nexus/content/groups/public/"
         }
+        maven {
+            url "https://mirrors.huaweicloud.com/repository/maven/"
+            name = "华为开源镜像库"
+        }
         maven {url "https://plugins.gradle.org/m2/"}
-//        maven { url"https://repo.spring.io/libs-release" }
-//        maven { url "http://repo.spring.io/snapshot" }
-//        maven { url "http://repo.spring.io/milestone" }
         jcenter()
     }
     dependencies {
@@ -53,20 +54,10 @@ allprojects {
         maven {
             credentials {
                 username 'deployment'
-                password ''
+                password 'deployment'
             }
-            url "http://120.25.156.197:8081/nexus/content/groups/public/"
+            url "http://192.168.1.112:8081/nexus/content/groups/public/"
         }
-        /*
-        def REPOSITORY_URL = 'http://maven.aliyun.com/nexus/content/groups/public/'
-        all { ArtifactRepository repo ->
-            def url = repo.url.toString()
-            if ((repo instanceof MavenArtifactRepository) && (url.startsWith('https://repo1.maven.org/maven2') || url.startsWith('https://jcenter.bintray.com'))) {
-                project.logger.lifecycle 'Repository ${repo.url} replaced by $REPOSITORY_URL .'
-                remove repo
-            }
-        }
-        */
         maven {
             url "http://maven.aliyun.com/nexus/content/groups/public/"
             name = "阿里云"
@@ -79,13 +70,13 @@ allprojects {
             url "http://repo1.maven.org/maven2"
         }
         maven {
-            url "https://repo.spring.io/libs-release"
-        }
-        maven { url 'http://repo.spring.io/snapshot' }
-        maven { url "http://repo.spring.io/milestone" }
-        maven {
             url "https://plugins.gradle.org/m2/"
         }
+        maven {
+            url "https://repo.spring.io/libs-release"
+        }
+//        maven { url 'http://repo.spring.io/snapshot' }
+//        maven { url "http://repo.spring.io/milestone" }
         maven {
             url "http://repository.jboss.org/nexus/content/groups/public/"
             name = "jboss"
