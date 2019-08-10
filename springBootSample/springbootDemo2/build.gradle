@@ -1,16 +1,114 @@
-plugins {
-    id 'java'
-}
-
 group 'com.aaron'
 version '1.0.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
+buildscript {
+    repositories {
+        mavenLocal()
+        maven {
+            url "http://192.168.1.112:8081/nexus/content/groups/public/"
+        }
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+        }
+        maven {
+            url "https://mirrors.huaweicloud.com/repository/maven/"
+            name = "华为开源镜像库"
+        }
+        maven { url 'https://repo.spring.io/libs-milestone' }
+        maven {url "https://plugins.gradle.org/m2/"}
+        jcenter()
+    }
+    dependencies {
+//        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.2.0.M5'
+//        classpath('se.transmode.gradle:gradle-docker:1.2')
+        classpath "gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.21.0"
+    }
 }
 
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+allprojects {
+    apply plugin: 'java'
+
+    // JDK 8
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    // 全局属性设置
+    ext {
+        // java文件编码方式设置为utf-8
+        compileJava.options.encoding = 'UTF-8'
+        compileTestJava.options.encoding = 'UTF-8'
+        javadoc.options.encoding = 'utf-8'
+    }
+
+//    [ compileJava, compileTestJava, javadoc ]*.options*.encoding = 'UTF-8'
+
+    /*@SuppressWarnings("unchecked")*/
+    tasks.withType(JavaCompile) {
+        options.deprecation = false
+        options.compilerArgs += ["-XDignore.symbol.file", "-Xdoclint:none", "-Xlint:unchecked", "-Xlint:deprecation", "-nowarn"]
+        options.encoding = 'UTF-8'
+    }
+
+    repositories {
+        //使用Maven本地缓存
+        mavenLocal()
+        maven {
+            credentials {
+                username 'deployment'
+                password 'deployment'
+            }
+            url "http://192.168.1.112:8081/nexus/content/groups/public/"
+        }
+        maven {
+            url "http://maven.aliyun.com/nexus/content/groups/public/"
+            name = "阿里云"
+        }
+        maven {
+            url "https://mirrors.huaweicloud.com/repository/maven/"
+            name = "华为开源镜像库"
+        }
+        maven {
+            url "http://repo1.maven.org/maven2"
+        }
+        maven { url 'https://repo.spring.io/libs-milestone' }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+            url "https://repo.spring.io/libs-release"
+        }
+//        maven { url 'http://repo.spring.io/snapshot' }
+//        maven { url "http://repo.spring.io/milestone" }
+        maven {
+            url "http://repository.jboss.org/nexus/content/groups/public/"
+            name = "jboss"
+        }
+        maven {
+            url "https://repository.jboss.org/nexus/content/repositories/releases/"
+            name = "jbossJBPM"
+        }
+        jcenter()
+        mavenCentral()
+    }
+
 }
+
+subprojects {
+    apply plugin: 'idea'
+
+    dependencies {
+        testCompileOnly 'org.junit.jupiter:junit-jupiter-api:5.0.1'
+        testCompileOnly 'org.junit.jupiter:junit-jupiter-engine:5.0.1'
+//        compile 'junit:junit:4.9'
+    }
+
+    version '1.0.0-SNAPSHOT'
+//    version '1.0.0-RELEASE'
+
+    jar {
+        manifest.attributes provider: 'springbootDemo'
+    }
+
+}
+
+

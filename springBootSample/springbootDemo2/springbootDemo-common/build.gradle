@@ -1,16 +1,74 @@
-plugins {
-    id 'java'
+apply plugin: 'java-library'
+
+group = 'com.aaron'
+version = '1.0.0-SNAPSHOT'
+
+//全局排除特定的依赖包
+configurations {
+    implementation {
+        exclude group: 'javax.jms', module: 'jms'
+        exclude group: 'com.sun.jdmk', module: 'jmxtools'
+        exclude group: 'com.sun.jmx', module: 'jmxri'
+    }
 }
 
-group 'com.aaron'
-version '1.0.0-SNAPSHOT'
+//全局排除依赖项
+//configurations.all {
+//    transitive = false
+//}
 
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
-}
+//依赖项目其它的模块方式一
+//project(':springbootDemo-common') {
+//    dependencies {
+//        implementation project(':springbootDemo-api')
+//    }
+//}
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    //依赖项目其它的模块方式二
+//    api project(':springbootDemo-api')
+
+    implementation 'joda-time:joda-time:2.9.7'
+    //指定依赖包中的版本
+    implementation 'org.apache.httpcomponents:httpclient'
+    constraints {
+        implementation('org.apache.httpcomponents:httpclient:4.5.3') {
+            because 'previous versions have a bug impacting this application'
+        }
+        implementation('commons-codec:commons-codec:1.11') {
+            because 'version 1.9 pulled from httpclient has bugs affecting this application'
+        }
+    }
+    //排除依赖的特定包
+//        implementation('log4j:log4j:1.2.15') {
+//            exclude group: 'com.sun.jmx', module: 'jmxri'
+//        }
+    //强制指定特定版本
+    implementation('commons-codec:commons-codec:1.9') {
+        force = true
+    }
+    //禁用解析依赖传递包
+    implementation('com.google.guava:guava:28.0-jre') {
+        transitive = false
+    }
+
+    implementation platform('org.springframework.boot:spring-boot-dependencies:1.5.8.RELEASE')
+
+//    runtimeOnly files('libs/a.jar', 'libs/b.jar')
+//    runtimeOnly fileTree('libs') { include '*.jar' }
+
+    // Each project has a dependency on the platform
+//        api(platform(project(":platform")))
+
+    // And any additional dependency required
+//        implementation(project(":lib"))
+//        implementation(project(":utils"))
+
+    // The platform declares constraints on all components that
+    // require alignment
+//        constraints {
+//            api(project(":core"))
+//            api(project(":lib"))
+//            api(project(":utils"))
+//        }
 }

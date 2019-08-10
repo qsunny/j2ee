@@ -1,16 +1,116 @@
 plugins {
-    id 'java'
+//    id 'org.springframework.boot' version '2.2.0.M5'
+    id 'java-library'
+    id("org.springframework.boot") version "2.2.0.M5" apply true
+    id("io.spring.dependency-management") version "1.0.8.RELEASE"
+}
+//apply plugin: 'org.springframework.boot'
+//apply plugin: 'io.spring.dependency-management'
+//apply plugin: 'docker'
+apply plugin: "com.palantir.docker"
+
+group = 'com.aaron'
+
+jar {
+    enabled = false
 }
 
-group 'com.aaron'
-version '1.0.0-SNAPSHOT'
-
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
+bootJar {
+    mainClassName = 'com.aaron.springbootDemo.web.SpringbootDemoApp'
+    launchScript()
 }
+
+configurations {
+    compile.exclude module: "spring-boot-starter-tomcat"
+}
+
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation project(':springbootDemo-core')
+    implementation "org.springframework.boot:spring-boot-starter-jetty"
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+
 }
+
+docker {
+    if (project.hasProperty('env')&&"prod".equals(project.env)
+            &&project.hasProperty('num')&&!"".equals(project.env)) {
+        project.version = project.num +"-RELEASE"
+    } else {
+        project.version = '1.0.0-SNAPSHOT'
+    }
+
+    if (project.hasProperty('env')&&"prod".equals(project.env)) {
+        dockerfile = file('src/main/docker/Dockerfile-prod')
+    } else if(project.hasProperty('env')&&"test".equals(project.env)){
+        dockerfile = file('src/main/docker/Dockerfile-test')
+    } else {
+        dockerfile = file('src/main/docker/Dockerfile-dev')
+    }
+    String jarName = jar.getBaseName()+"-" + project.version + ".jar"
+    name "springbootDemo/springbootDemo-web:${project.version}"
+    files jar.archivePath
+
+    println "${jar.archiveName}"
+    println jarName
+
+}
+
+/**
+ * 命令使用 gradle clean buildApp -Penv=prod
+ * gradle clean buildApp -Penv=test
+ * 修改版本号需要更改Dockerfile-test,Dockerfile-prod中对应jar的版本号
+ */
+task buildApp(dependsOn: build) {
+    //jar.setBaseName(jar.getBaseName().toLowerCase())
+    if (project.hasProperty('env')&&"prod".equals(project.env)
+            &&project.hasProperty('num')&&!"".equals(project.env)) {
+        project.version = project.num +"-RELEASE"
+    } else {
+        project.version = '1.0.0-SNAPSHOT'
+    }
+
+    //println "$project.env"
+    //println project.env
+//    if (project.hasProperty('env')&&"prod".equals(project.env)) {
+//        project.version = '1.0.0-RELEASE'
+//    } else {
+//        project.version = '1.0.0-SNAPSHOT'
+//    }
+    //println "$version"
+}
+
+
+/**
+ * 构建docker镜像
+ * gradle buildDocker -Penv=prod -PversionNum=1.0.1
+ * gradle buildDocker -Penv=test -PversionNum=1.0.1
+ * https://github.com/Transmode/gradle-docker
+ * tag = "${project.group}/${applicationName}:${tagVersion}"
+ */
+/*task buildDocker(type: Docker, dependsOn: buildApp) {
+    applicationName = jar.baseName
+
+//    if(project.hasProperty('versionNum')) {
+//        versionNum = project.versionNum
+//    }
+
+    //setEnvironment('version',versionNum)
+
+    if (project.hasProperty('env')&&"prod".equals(project.env)) {
+        dockerfile = file('src/main/docker/Dockerfile-prod')
+    } else if(project.hasProperty('env')&&"test".equals(project.env)){
+        dockerfile = file('src/main/docker/Dockerfile-test')
+    } else {
+        dockerfile = file('src/main/docker/Dockerfile-dev')
+    }
+
+    doFirst {
+        copy {
+            from jar
+            into stageDir
+        }
+    }
+}*/
+

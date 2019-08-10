@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aaron.springbootDemo.core.dao.user.IUserDao" >
+    <resultMap id="UserMap" type="User" >
+        
+        <result column="id" property="id" jdbcType="BIGINT" />
+        
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        
+        <result column="age" property="age" jdbcType="SMALLINT" />
+        
+        <result column="balance" property="balance" jdbcType="BIGINT" />
+    </resultMap>
+    
+    <sql id="Base_Column_List" >
+        id,
+        name,
+        age,
+        balance
+    </sql>
+
+    <sql id="normalWhere">
+        <if test="id!=null">
+            and id = #{id,jdbcType=BIGINT}
+        </if>
+        <if test="name!=null">
+            and name = #{name,jdbcType=VARCHAR}
+        </if>
+        <if test="age!=null">
+            and age = #{age,jdbcType=SMALLINT}
+        </if>
+        <if test="balance!=null">
+            and balance = #{balance,jdbcType=BIGINT}
+        </if>
+    </sql>
+
+    <sql id="where">
+        <if test="user.id!=null">
+        and id = #{user.id,jdbcType=BIGINT}
+        </if>
+        <if test="user.name!=null">
+        and name = #{user.name,jdbcType=VARCHAR}
+        </if>
+        <if test="user.age!=null">
+        and age = #{user.age,jdbcType=SMALLINT}
+        </if>
+        <if test="user.balance!=null">
+        and balance = #{user.balance,jdbcType=BIGINT}
+        </if>
+    </sql>
+    
+    <select id="getUserById" resultMap="UserMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from user
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="getAll" parameterType="User" resultMap="UserMap">
+        select * from user where 1=1 
+        <include refid="normalWhere" />
+    </select>
+    
+    <select id="getPagerModelByQuery" parameterType="User" resultMap="UserMap">
+        select * from user where 1=1 
+        <include refid="where" />
+    </select>
+    
+    <select id="getByPageCount" parameterType="User" resultType="int">
+        select count(1) from user where 1=1 
+        <include refid="normalWhere" />
+    </select>
+   
+    <insert id="insertUser" parameterType="User" >
+        insert into user (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=BIGINT},
+        #{name,jdbcType=VARCHAR},
+        #{age,jdbcType=SMALLINT},
+        #{balance,jdbcType=BIGINT}
+        )
+    </insert>
+    
+    <delete id="delUserById" parameterType="java.lang.String" >
+        delete from user
+        where ID = #{id,jdbcType=VARCHAR}
+    </delete>
+    
+    <update id="updateUser" parameterType="User" >
+        update user
+        <set>
+            <if test="name != null " >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="age != null " >
+                age = #{age,jdbcType=SMALLINT},
+            </if>
+            <if test="balance != null " >
+                balance = #{balance,jdbcType=BIGINT}
+            </if>
+        </set>
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>
