@@ -7,7 +7,7 @@ import java.io.Serializable;
  * <p> aaron.qiu </p>
  * <p>Version: 1.0.0</p>
  * <p>Create Date： 2019-01-14 14:47:50 </p>
- * <p>Copyright (c) 2017 ~ 2018 Allchips版权所有</p>
+ * <p>Copyright (c) 2017 ~ 2018 版权所有</p>
  */
 public class User implements Serializable{
     
