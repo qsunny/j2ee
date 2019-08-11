@@ -5,14 +5,18 @@ import com.aaron.springbootDemo.core.service.redis.RedisService;
 import com.aaron.springbootDemo.utils.CommUtils;
 import com.aaron.springbootDemo.utils.JsonUtil;
 import org.junit.Assert;
+import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.system.OutputCaptureRule;
 import org.springframework.test.context.junit4.SpringRunner;
-import web.SpringbootDemoApp;
+import com.aaron.springbootDemo.web.SpringbootDemoApp;
 
 import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
+
+import static org.hamcrest.Matchers.containsString;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {SpringbootDemoApp.class})
@@ -23,6 +27,14 @@ public class RedisServiceTest {
     @Test
     public void test1() {
         Assert.assertNotNull(redisService);
+    }
+
+    @ClassRule
+    public static OutputCaptureRule out = new OutputCaptureRule();
+
+    @Test
+    public void contextLoads() {
+        out.expect(containsString("1,San Francisco,CA,US"));
     }
 
     @Test

@@ -24,12 +24,20 @@ configurations {
     compile.exclude module: "spring-boot-starter-tomcat"
 }
 
+project(':springbootDemo-web') {
+    dependencies {
+        implementation project(':springbootDemo-api')
+        implementation project(':springbootDemo-common')
+        implementation project(':springbootDemo-core')
+    }
+}
 
 dependencies {
-    implementation project(':springbootDemo-core')
+//    api project(':springbootDemo-core')
     implementation "org.springframework.boot:spring-boot-starter-jetty"
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.1.0"
 
 }
 

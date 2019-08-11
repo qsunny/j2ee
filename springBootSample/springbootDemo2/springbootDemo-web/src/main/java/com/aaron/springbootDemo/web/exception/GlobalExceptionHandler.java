@@ -1,4 +1,4 @@
-package web.exception;
+package com.aaron.springbootDemo.web.exception;
 
 import com.aaron.springbootDemo.bean.common.GenericResp;
 import com.aaron.springbootDemo.enums.common.BaseResponse;

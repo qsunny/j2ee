@@ -1,4 +1,4 @@
-package web;
+package com.aaron.springbootDemo.web;
 import javafx.scene.Parent;
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

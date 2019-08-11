@@ -15,20 +15,19 @@ jar {
     enabled = true
 }
 
-//project(':springbootDemo-core') {
-//    dependencies {
-//        implementation project(':springbootDemo-api')
-//        implementation project(':springbootDemo-common')
-//    }
-//}
+project(':springbootDemo-core') {
+    dependencies {
+        implementation project(':springbootDemo-api')
+        implementation project(':springbootDemo-common')
+    }
+}
 
 dependencies {
-    api project(':springbootDemo-api')
-    api project(':springbootDemo-common')
+//    api project(':springbootDemo-common')
 
 //    implementation 'org.apache.commons:commons-lang3:3.8.1'
     api 'com.alibaba:druid:1.1.10'
-    api 'mysql:mysql-connector-java:8.0.13'
+    api 'mysql:mysql-connector-java:8.0.17'
     api ('com.101tec:zkclient:0.11')
     api 'org.javassist:javassist:3.20.0-GA'
     api 'org.jboss.netty:netty:3.2.0.Final'
@@ -43,8 +42,9 @@ dependencies {
     api group: 'com.githup.liuyanggithup', name: 'xxl-job-core', version: '1.2.0'
 //    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
 //    api "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.0"
-    api "org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.2"
+    api "org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.0"
     api "org.springframework.boot:spring-boot-starter-data-redis"
+    api "org.springframework.boot:spring-boot-starter-cache"
     api "org.springframework.boot:spring-boot-starter-data-jdbc"
 }
 

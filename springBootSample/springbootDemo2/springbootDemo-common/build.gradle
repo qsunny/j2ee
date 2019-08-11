@@ -18,19 +18,19 @@ configurations {
 //}
 
 //依赖项目其它的模块方式一
-//project(':springbootDemo-common') {
-//    dependencies {
-//        implementation project(':springbootDemo-api')
-//    }
-//}
+project(':springbootDemo-common') {
+    dependencies {
+        implementation project(':springbootDemo-api')
+    }
+}
 
 dependencies {
     //依赖项目其它的模块方式二
 //    api project(':springbootDemo-api')
 
-    implementation 'joda-time:joda-time:2.9.7'
+    api 'joda-time:joda-time:2.9.7'
     //指定依赖包中的版本
-    implementation 'org.apache.httpcomponents:httpclient'
+    api 'org.apache.httpcomponents:httpclient'
     constraints {
         implementation('org.apache.httpcomponents:httpclient:4.5.3') {
             because 'previous versions have a bug impacting this application'

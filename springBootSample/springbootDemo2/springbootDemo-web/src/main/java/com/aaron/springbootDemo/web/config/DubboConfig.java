@@ -1,4 +1,4 @@
-package web.config;
+package com.aaron.springbootDemo.web.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;

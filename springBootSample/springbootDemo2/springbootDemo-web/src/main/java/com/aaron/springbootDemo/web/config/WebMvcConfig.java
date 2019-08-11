@@ -1,9 +1,9 @@
-package web.config;
+package com.aaron.springbootDemo.web.config;
 
+import com.aaron.springbootDemo.web.interceptor.RequestApiInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import web.interceptor.RequestApiInterceptor;
 
 import javax.annotation.Resource;
 

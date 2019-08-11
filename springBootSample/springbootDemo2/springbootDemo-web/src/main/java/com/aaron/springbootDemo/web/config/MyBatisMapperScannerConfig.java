@@ -1,4 +1,4 @@
-package web.config;
+package com.aaron.springbootDemo.web.config;
 
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;

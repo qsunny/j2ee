@@ -1,4 +1,4 @@
-package web.config;
+package com.aaron.springbootDemo.web.config;
 
 import com.aaron.springbootDemo.core.pager.DaoTimeConsumingMonitor;
 import com.aaron.springbootDemo.core.pager.PageInterceptor;
