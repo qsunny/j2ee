@@ -2,7 +2,7 @@ plugins {
 //    id 'org.springframework.boot' version '2.2.0.M5'
     id 'java-library'
     id("org.springframework.boot") version "2.2.0.M5" apply true
-    id("io.spring.dependency-management") version "1.0.8.RELEASE"
+    id("io.spring.dependency-management") version "1.0.8.RELEASE" apply true
 }
 
 //apply plugin: 'io.spring.dependency-management'
