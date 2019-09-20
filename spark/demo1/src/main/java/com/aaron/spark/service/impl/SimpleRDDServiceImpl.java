@@ -19,6 +19,10 @@ public class SimpleRDDServiceImpl implements ISparkService {
         JavaRDD<Integer> distData = sc.parallelize(data);
         int result = distData.first();
         System.out.println(result);
+
+        JavaRDD<String> distFile = sc.textFile("data.txt");
+
+
         sc.close();
     }
 }
