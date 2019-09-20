@@ -1,0 +1,59 @@
+group 'com.aaron'
+version '1.0.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+// JDK 8
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// 全局属性设置
+ext {
+    // java文件编码方式设置为utf-8
+    compileJava.options.encoding = 'UTF-8'
+    compileTestJava.options.encoding = 'UTF-8'
+    javadoc.options.encoding = 'utf-8'
+}
+
+/*@SuppressWarnings("unchecked")*/
+tasks.withType(JavaCompile) {
+    options.deprecation = false
+    options.compilerArgs += ["-XDignore.symbol.file", "-Xdoclint:none", "-Xlint:unchecked", "-Xlint:deprecation", "-nowarn"]
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        url "http://120.25.156.197:8081/nexus/content/groups/public/"
+    }
+    maven {
+        url "http://maven.aliyun.com/nexus/content/groups/public/"
+    }
+    maven {
+        url "https://mirrors.huaweicloud.com/repository/maven/"
+        name = "华为开源镜像库"
+    }
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+//        maven { url"https://repo.spring.io/libs-release" }
+//        maven { url "http://repo.spring.io/snapshot" }
+//        maven { url "http://repo.spring.io/milestone" }
+    jcenter()
+}
+
+dependencies {
+    implementation group: 'org.apache.spark', name: 'spark-core_2.12', version: '2.4.3'
+    implementation group: 'org.apache.spark', name: 'spark-sql_2.12', version: '2.4.3'
+    implementation group: 'org.apache.spark', name: 'spark-mllib_2.12', version: '2.4.3'
+    implementation group: 'org.apache.spark', name: 'spark-streaming_2.12', version: '2.4.3'
+    implementation group: 'org.apache.spark', name: 'spark-hive_2.12', version: '2.4.3'
+    implementation group: 'org.apache.spark', name: 'spark-graphx_2.12', version: '2.4.3'
+    //implementation group: 'org.apache.spark', name: 'spark-repl_2.12', version: '2.4.3'
+//    implementation group: 'org.apache.hadoop', name: 'hadoop-client', version: '3.2.0'
+
+    testImplementation group: 'org.apache.spark', name: 'spark-catalyst_2.12', version: '2.4.3'
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.0.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.0.1'
+    testImplementation 'org.junit.vintage:junit-vintage-engine:4.12.1'
+}
