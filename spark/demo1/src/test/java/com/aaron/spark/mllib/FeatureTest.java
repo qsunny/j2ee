@@ -20,7 +20,6 @@ public class FeatureTest extends BaseSparkTest {
     public void featureEncodingTest() {
         Pipeline pipeline = new Pipeline("myPipeline");
 
-        Dataset<Row> df = spark.createDataFrame(new Arr).toDF("id","ddd");
     }
 
 
