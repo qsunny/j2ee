@@ -24,7 +24,7 @@ public class JavaModelSelectionViaTrainValidationSplitServiceImpl implements ISp
         Dataset<Row> data = spark.read().format("libsvm")
                 .load("src/main/resources/data/sample_linear_regression_data.txt");
 
-    // Prepare training and test data.
+        // Prepare training and test data.
         Dataset<Row>[] splits = data.randomSplit(new double[] {0.9, 0.1}, 12345);
         Dataset<Row> training = splits[0];
         Dataset<Row> test = splits[1];
