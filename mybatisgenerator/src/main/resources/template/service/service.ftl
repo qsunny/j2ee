@@ -1,15 +1,15 @@
-package com.ceacsz.dao.${model};
+package com.tulang.${model}.core.service.${fLowerObjectName};
 
 import java.util.List;
-import com.allchips.common.base.page.Page;
-import com.allchips.${model}.api.bean.${objectName};
+import com.tulang.common.base.page.Page;
+import com.tulang.beans.${model}.${fLowerObjectName}.${objectName};
 
 /**
 * <p>I${objectName}Service接口</p>
 * <p> ${author} </p>
 * <p>Version:1.0.0</p>
 * <p>Create Date:${createTime} </p>
-* <p>Copyright (c) 2017 ~ 2018 Allchips版权所有</p>
+* <p>Copyright (c) 2017 ~ 2022 Tulang版权所有</p>
 */
 public interface I${objectName}Service {
 

@@ -1,24 +1,24 @@
-package com.allchips.${model}.dao.${fLowerObjectName};
+package com.tulang.${model}.dao.${fLowerObjectName};
 
 import java.util.List;
 import org.springframework.stereotype.Repository;
-import com.allchips.tools.pager.PagerModel;
-import com.allchips.tools.pager.Query;
-import com.allchips.tools.template.MybatisTemplate;
-import com.allchips.${model}.api.bean.${objectName};
-import com.allchips.${model}.core.dao.${fLowerObjectName}.I${objectName}Dao;
+import com.tulang.tools.pager.PagerModel;
+import com.tulang.tools.pager.Query;
+import com.tulang.tools.template.MybatisTemplate;
+import com.tulang.beans.${model}.${fLowerObjectName}.${objectName};
+import com.tulang.${model}.dao.${fLowerObjectName}.I${objectName}Dao;
 
 /**
  * <p>I${objectName}Dao接口实现类</p>
  * <p>Version:1.0.0</p>
  * <p>Create Date:${createTime} </p>
- * <p>Copyright (c) 2017 ~ 2018 Allchips版权所有</p>
+ * <p>Copyright (c) 2017 ~ 2022 tulang版权所有</p>
  */
 @Repository
 public class ${objectName}DaoImpl extends MybatisTemplate implements I${objectName}Dao {
 
 	@Override
-	public ${objectName} get${objectName}ById(String id) throws Exception {
+	public ${objectName} get${objectName}ById(Long id) throws Exception {
 		return this.selectOne("${objectName}XML.get${objectName}ById", id);
 	}
 

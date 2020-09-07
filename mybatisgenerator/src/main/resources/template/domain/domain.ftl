@@ -1,4 +1,4 @@
-package com.allchips.${model}.common.bean;
+package com.tulang.beans.${model}.${fLowerObjectName};
 
 import java.io.Serializable;
 
@@ -8,7 +8,7 @@ import java.util.Date;
  * <p> ${author} </p>
  * <p>Version: 1.0.0</p>
  * <p>Create Date： ${createTime} </p>
- * <p>Copyright (c) 2017 ~ 2018 Allchips版权所有</p>
+ * <p>Copyright (c) 2017 ~ 2022 Tulang版权所有</p>
  */
 public class ${objectName} implements Serializable{
     <#if columnFieldList??>

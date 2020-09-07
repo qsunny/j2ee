@@ -1,8 +1,8 @@
-package com.ceacsz.dao.${model};
+package com.tulang.dao.${model};
 
 import java.util.List;
-import com.allchips.common.base.page.Page;
-import com.allchips.${model}.api.bean.${objectName};
+import com.tulang.common.base.page.Page;
+import com.tulang.beans.${model}.${fLowerObjectName}.${objectName};
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * <p> ${author} </p>
  * <p>Version:1.0.0</p>
  * <p>Create Date:${createTime} </p>
- * <p>Copyright (c) 2017 ~ 2018 Allchips版权所有</p>
+ * <p>Copyright (c) 2017 ~ 2022 tulang版权所有</p>
  */
 @Repository
 public interface I${objectName}Dao {
@@ -22,7 +22,7 @@ public interface I${objectName}Dao {
 	* @return 返回${objectName}
 	* @throws Exception
 	*/
-	public ${objectName} get${objectName}ById(String id) throws Exception;
+	public ${objectName} get${objectName}ById(Long id) throws Exception;
 
 	/**
 	 * 根据条件查询${objectName}列表	 

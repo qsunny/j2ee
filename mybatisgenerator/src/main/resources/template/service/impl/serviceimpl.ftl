@@ -1,4 +1,4 @@
-package com.allchips.${model}.service.${fLowerObjectName};
+package com.tulang.${model}.core.service.${fLowerObjectName};
 
 
 import javax.annotation.Resource;
@@ -7,16 +7,16 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
-import com.allchips.common.base.page.Page;
-import com.allchips.${model}.api.bean.${objectName};
-import com.allchips.${model}.core.dao.${fLowerObjectName}.I${objectName}Dao;
+import com.tulang.common.base.page.Page;
+import com.tulang.beans.${model}.${fLowerObjectName}.${objectName};
+import com.tulang.${model}.dao.${fLowerObjectName}.I${objectName}Dao;
 
 /**
 * <p>I${objectName}Service接口实现类</p>
 * <p> ${author} </p>
 * <p>Version:1.0.0</p>
 * <p>Create Date:${createTime} </p>
-* <p>Copyright (c) 2017 ~ 2018 Allchips版权所有</p>
+* <p>Copyright (c) 2017 ~ 2022 Tulang版权所有</p>
 */
 @Service
 public class ${objectName}ServiceImpl implements I${objectName}Service {

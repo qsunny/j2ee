@@ -18,7 +18,13 @@ public class PropertiesUtil
         }
         System.out.println("path==="+path);
         if(path!=null&&path.lastIndexOf("/lib")>=0) {
-            path = path.replaceAll("file:/","");
+            String os = System.getProperty("os.name");
+            if(!"Linux".equals(os)) {
+                System.out.println("==os====" + os);
+                path = path.replaceAll("file:/", "");
+            } else {
+                path = path.replaceAll("file:", "");
+            }
             configPath = path.substring(0, path.lastIndexOf("/lib")) + "/config/";
         }
 
