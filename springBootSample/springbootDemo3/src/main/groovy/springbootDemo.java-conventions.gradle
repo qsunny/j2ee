@@ -1,0 +1,14 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.aaron'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation "junit:junit:4.13"
+}

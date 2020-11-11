@@ -1,0 +1,3 @@
+rootProject.name = 'springbootDemo3'
+include 'springbootDemo-api', 'springbootDemo-common', 'springbootDemo-dao', 'springbootDemo-core', 'springbootDemo-web'
+

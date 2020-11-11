@@ -1,0 +1,29 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.4.RELEASE' apply false
+    id("io.spring.dependency-management") version "1.0.10.RELEASE"
+}
+group 'com.aaron'
+version '1.0.0-SNAPSHOT'
+
+jar {
+    enabled = true
+}
+
+dependencies {
+    api project(':springbootDemo-dao')
+
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        //这样就可以收录java目录中的资源文件了
+        resources {
+            srcDirs = ['src/main/resources', 'src/main/java']
+        }
+
+    }
+}
+
