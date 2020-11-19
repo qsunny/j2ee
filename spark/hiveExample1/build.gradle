@@ -1,0 +1,95 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.5.RELEASE'
+    id "io.spring.dependency-management" version "1.0.8.RELEASE"
+}
+
+group 'com.aaron'
+version '1.0.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'idea'
+apply plugin: 'java-library'
+
+jar {
+    enabled = true
+}
+
+// JDK 8
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// 全局属性设置
+ext {
+    // java文件编码方式设置为utf-8
+    compileJava.options.encoding = 'UTF-8'
+    compileTestJava.options.encoding = 'UTF-8'
+    javadoc.options.encoding = 'utf-8'
+}
+
+// tag::mainClassName-conf[]
+mainClassName = "com.aaron.example.SparkHiveExample"
+// end::mainClassName-conf[]
+
+// tag::application-defaultjvmargs[]
+//applicationDefaultJvmArgs = ["-Dgreeting.language=en"]
+// end::application-defaultjvmargs[]
+
+// tag::executableDir-conf[]
+executableDir = "custom_bin_dir"
+// end::executableDir-conf[]
+
+// tag::distribution-spec[]
+task createDocs {
+    def docs = file("$buildDir/docs")
+    outputs.dir docs
+    doLast {
+        docs.mkdirs()
+        new File(docs, "readme.txt").write("Read me!")
+    }
+}
+
+distributions {
+    main {
+        contents {
+            from(createDocs) {
+                into "docs"
+            }
+        }
+    }
+}
+// end::distribution-spec[]
+
+repositories {
+    mavenLocal()
+    maven {
+        url "https://maven.aliyun.com/repository/public"
+    }
+    maven {
+        url "https://mirrors.huaweicloud.com/repository/maven/"
+        name = "华为开源镜像库"
+    }
+    maven {
+        credentials {
+            username 'deployment'
+            password 'deployment123'
+        }
+        url "http://120.25.156.197:8081/nexus/content/groups/public/"
+    }
+}
+
+dependencies {
+    api("org.apache.spark:spark-core_2.12:3.0.1")
+    api("org.apache.spark:spark-sql_2.12:3.0.1")
+    api('org.apache.spark:spark-mllib_2.12:3.0.1')
+    api('org.apache.spark:spark-streaming_2.12:3.0.1')
+    api('org.apache.spark:spark-hive_2.12:3.0.1')
+    api('org.apache.spark:spark-yarn_2.12:3.0.1')
+//    api 'mysql:mysql-connector-java:8.0.16'
+    api 'mysql:mysql-connector-java:5.1.39'
+    api 'org.apache.hive:hive-jdbc:2.3.7'
+
+    testImplementation('org.junit.platform:junit-platform-launcher:1.0.1')
+    testImplementation('org.junit.jupiter:junit-jupiter-engine:5.0.1')
+    testImplementation('org.junit.vintage:junit-vintage-engine:4.12.1')
+}
