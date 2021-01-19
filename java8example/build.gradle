@@ -7,24 +7,31 @@ sourceCompatibility = 1.8
 
 repositories {
 	mavenLocal()
+//	maven {
+//		credentials {
+//			username 'aaron'
+//			password 'aaron123'
+//		}
+//		url "http://192.168.1.112:8081/nexus/content/groups/public/"
+//	}
 	maven {
-		credentials {
-			username 'aaron'
-			password 'aaron123'
-		}			
-		url "http://192.168.1.112:8081/nexus/content/groups/public/"		
+		url "https://maven.aliyun.com/repository/central"
 	}
 	maven {
-		url "http://repo1.maven.org/maven2"
+		url "https://mirrors.huaweicloud.com/repository/maven/"
+		name = "华为开源镜像库"
 	}
 	maven {
-		url "http://maven.aliyun.com/nexus/content/groups/public/"
+		url "https://maven.aliyun.com/repository/public"
+	}
+	maven {
+		url "https://maven.aliyun.com/repository/gradle-plugin"
 	}
     mavenCentral()
 }
 
 dependencies {
-	compile group: 'joda-time', name: 'joda-time', version: '2.9.9'
-	testCompile 'org.mockito:mockito-core:2.0.73-beta'
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+	implementation group: 'joda-time', name: 'joda-time', version: '2.9.9'
+	testImplementation 'org.mockito:mockito-core:2.0.73-beta'
+	testImplementation group: 'junit', name: 'junit', version: '4.11'
 }
