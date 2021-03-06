@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aaron.springbootDemo.dao.log.ITeamWorkSearchLogDao" >
+    <resultMap id="TeamWorkSearchLogMap" type="TeamWorkSearchLog" >
+
+        <result column="id" property="id" jdbcType="INTEGER" />
+
+        <result column="bom_id" property="bomId" jdbcType="BIGINT" />
+
+        <result column="inquiry_id" property="inquiryId" jdbcType="BIGINT" />
+
+        <result column="type" property="type" jdbcType="SMALLINT" />
+
+        <result column="search_condition" property="searchCondition" jdbcType="LONGVARCHAR" />
+
+        <result column="purchase_condition" property="purchaseCondition" jdbcType="LONGVARCHAR" />
+
+        <result column="fail_reason" property="failReason" jdbcType="VARCHAR" />
+
+        <result column="matching_process_record" property="matchingProcessRecord" jdbcType="VARCHAR" />
+
+        <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
+
+        <result column="create_user_name" property="createUserName" jdbcType="VARCHAR" />
+
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+
+        <result column="update_user_id" property="updateUserId" jdbcType="INTEGER" />
+
+        <result column="update_user_name" property="updateUserName" jdbcType="VARCHAR" />
+
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id,
+        bom_id,
+        inquiry_id,
+        `type`,
+        search_condition,
+        purchase_condition,
+        fail_reason,
+        matching_process_record,
+        create_user_id,
+        create_user_name,
+        create_time,
+        update_user_id,
+        update_user_name,
+        update_time
+    </sql>
+
+    <sql id="normalWhere">
+        <if test="id!=null">
+            and id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="bomId!=null">
+            and bom_id = #{bomId,jdbcType=BIGINT}
+        </if>
+        <if test="inquiryId!=null">
+            and inquiry_id = #{inquiryId,jdbcType=BIGINT}
+        </if>
+        <if test="type!=null">
+            and `type` = #{type,jdbcType=SMALLINT}
+        </if>
+        <if test="searchCondition!=null">
+            and search_condition = #{searchCondition,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="purchaseCondition!=null">
+            and purchase_condition = #{purchaseCondition,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="failReason!=null">
+            and fail_reason = #{failReason,jdbcType=VARCHAR}
+        </if>
+        <if test="matchingProcessRecord!=null">
+            and matching_process_record = #{matchingProcessRecord,jdbcType=VARCHAR}
+        </if>
+        <if test="createUserId!=null">
+            and create_user_id = #{createUserId,jdbcType=INTEGER}
+        </if>
+        <if test="createUserName!=null">
+            and create_user_name = #{createUserName,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime!=null">
+            and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="updateUserId!=null">
+            and update_user_id = #{updateUserId,jdbcType=INTEGER}
+        </if>
+        <if test="updateUserName!=null">
+            and update_user_name = #{updateUserName,jdbcType=VARCHAR}
+        </if>
+        <if test="updateTime!=null">
+            and update_time = #{updateTime,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+
+    <sql id="where">
+        <if test="teamWorkSearchLog.id!=null">
+            and id = #{teamWorkSearchLog.id,jdbcType=INTEGER}
+        </if>
+        <if test="teamWorkSearchLog.bomId!=null">
+            and bom_id = #{teamWorkSearchLog.bomId,jdbcType=BIGINT}
+        </if>
+        <if test="teamWorkSearchLog.inquiryId!=null">
+            and inquiry_id = #{teamWorkSearchLog.inquiryId,jdbcType=BIGINT}
+        </if>
+        <if test="teamWorkSearchLog.type!=null">
+            and `type` = #{teamWorkSearchLog.teamworksearchlog.type,jdbcType=SMALLINT}
+        </if>
+        <if test="teamWorkSearchLog.searchCondition!=null">
+            and search_condition = #{teamWorkSearchLog.searchCondition,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="teamWorkSearchLog.purchaseCondition!=null">
+            and purchase_condition = #{teamWorkSearchLog.purchaseCondition,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="teamWorkSearchLog.failReason!=null">
+            and fail_reason = #{teamWorkSearchLog.failReason,jdbcType=VARCHAR}
+        </if>
+        <if test="teamWorkSearchLog.matchingProcessRecord!=null">
+            and matching_process_record = #{teamWorkSearchLog.matchingProcessRecord,jdbcType=VARCHAR}
+        </if>
+        <if test="teamWorkSearchLog.createUserId!=null">
+            and create_user_id = #{teamWorkSearchLog.createUserId,jdbcType=INTEGER}
+        </if>
+        <if test="teamWorkSearchLog.createUserName!=null">
+            and create_user_name = #{teamWorkSearchLog.createUserName,jdbcType=VARCHAR}
+        </if>
+        <if test="teamWorkSearchLog.createTime!=null">
+            and create_time = #{teamWorkSearchLog.createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="teamWorkSearchLog.updateUserId!=null">
+            and update_user_id = #{teamWorkSearchLog.updateUserId,jdbcType=INTEGER}
+        </if>
+        <if test="teamWorkSearchLog.updateUserName!=null">
+            and update_user_name = #{teamWorkSearchLog.updateUserName,jdbcType=VARCHAR}
+        </if>
+        <if test="teamWorkSearchLog.updateTime!=null">
+            and update_time = #{teamWorkSearchLog.updateTime,jdbcType=TIMESTAMP}
+        </if>
+    </sql>
+
+    <select id="getTeamWorkSearchLogById" resultMap="TeamWorkSearchLogMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from t_tw_search_log
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getAll" parameterType="TeamWorkSearchLog" resultMap="TeamWorkSearchLogMap">
+        select * from t_tw_search_log where 1=1
+        <include refid="normalWhere" />
+    </select>
+
+    <select id="getPagerModelByQuery" parameterType="TeamWorkSearchLog" resultMap="TeamWorkSearchLogMap">
+        select * from t_tw_search_log where 1=1
+        <include refid="where" />
+    </select>
+
+    <select id="getByPageCount" parameterType="TeamWorkSearchLog" resultType="int">
+        select count(1) from t_tw_search_log where 1=1
+        <include refid="normalWhere" />
+    </select>
+
+    <insert id="insertTeamWorkSearchLog" parameterType="TeamWorkSearchLog" >
+        insert into t_tw_search_log (<include refid="Base_Column_List" />)
+        values (
+        #{id,jdbcType=INTEGER},
+        #{bomId,jdbcType=BIGINT},
+        #{inquiryId,jdbcType=BIGINT},
+        #{type,jdbcType=SMALLINT},
+        #{searchCondition,jdbcType=LONGVARCHAR},
+        #{purchaseCondition,jdbcType=LONGVARCHAR},
+        #{failReason,jdbcType=VARCHAR},
+        #{matchingProcessRecord,jdbcType=VARCHAR},
+        #{createUserId,jdbcType=INTEGER},
+        #{createUserName,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP},
+        #{updateUserId,jdbcType=INTEGER},
+        #{updateUserName,jdbcType=VARCHAR},
+        #{updateTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <insert id="batchInsertTeamWorkSearchLog" useGeneratedKeys="true" keyProperty="id"  >
+        insert into t_tw_search_log (<include refid="Base_Column_List"/>) values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{item.id,jdbcType=INTEGER},
+            #{item.bomId,jdbcType=BIGINT},
+            #{item.inquiryId,jdbcType=BIGINT},
+            #{item.type,jdbcType=SMALLINT},
+            #{item.searchCondition,jdbcType=LONGVARCHAR},
+            #{item.purchaseCondition,jdbcType=LONGVARCHAR},
+            #{item.failReason,jdbcType=VARCHAR},
+            #{item.matchingProcessRecord,jdbcType=VARCHAR},
+            #{item.createUserId,jdbcType=INTEGER},
+            #{item.createUserName,jdbcType=VARCHAR},
+            #{item.createTime,jdbcType=TIMESTAMP},
+            #{item.updateUserId,jdbcType=INTEGER},
+            #{item.updateUserName,jdbcType=VARCHAR},
+            #{item.updateTime,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="delTeamWorkSearchLogById" parameterType="java.lang.String" >
+        delete from t_tw_search_log
+        where ID = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <update id="updateTeamWorkSearchLog" parameterType="TeamWorkSearchLog" >
+        update t_tw_search_log
+        <set>
+            <if test="bomId != null " >
+                bom_id = #{bomId,jdbcType=BIGINT},
+            </if>
+            <if test="inquiryId != null " >
+                inquiry_id = #{inquiryId,jdbcType=BIGINT},
+            </if>
+            <if test="type != null">
+                `type` = #{type,jdbcType=SMALLINT},
+            </if>
+            <if test="searchCondition != null " >
+                search_condition = #{searchCondition,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="purchaseCondition != null " >
+                purchase_condition = #{purchaseCondition,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="failReason != null " >
+                fail_reason = #{failReason,jdbcType=VARCHAR},
+            </if>
+            <if test="matchingProcessRecord != null " >
+                matching_process_record = #{matchingProcessRecord,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null " >
+                create_user_id = #{createUserId,jdbcType=INTEGER},
+            </if>
+            <if test="createUserName != null " >
+                create_user_name = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null " >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateUserId != null " >
+                update_user_id = #{updateUserId,jdbcType=INTEGER},
+            </if>
+            <if test="updateUserName != null " >
+                update_user_name = #{updateUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null " >
+                update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </set>
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

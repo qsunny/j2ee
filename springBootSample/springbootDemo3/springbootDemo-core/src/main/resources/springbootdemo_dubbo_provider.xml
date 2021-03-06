@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+	   xmlns="http://www.springframework.org/schema/beans"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+	
+	<!-- 提供给外部的接口 -->
+	<dubbo:service interface="com.aaron.springbootDemo.api.IMessageApi" ref="messageApiImpl" registry="zookeeper" owner="Aaron.Qiu" version="1.0.0" />
+
+</beans>

@@ -1,0 +1,35 @@
+plugins {
+
+}
+
+group 'com.aaron'
+version '1.0.0-SNAPSHOT'
+
+jar {
+    enabled = true
+}
+
+dependencies {
+//    implementation project(':springbootDemo-api')
+    api project(':springbootDemo-api')
+    api('org.apache.commons:commons-collections4:4.4')
+
+
+// get recommended versions from the platform project
+//    api platform(project(':springbootDemo-api'))
+
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        //这样就可以收录java目录中的资源文件了
+        resources {
+            srcDirs = ['src/main/resources', 'src/main/java']
+        }
+
+    }
+}
+

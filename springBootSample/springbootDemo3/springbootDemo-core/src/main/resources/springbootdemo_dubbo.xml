@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+	   xmlns="http://www.springframework.org/schema/beans"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+	<dubbo:application name="springBootDemo" />
+	<dubbo:registry id="zookeeper" protocol="zookeeper" address="${dubbo.registry.address}" file="${dubbo.home}/output/dubbo.cache" timeout="25000"/>
+	<!-- 设置不依赖 -->
+	<!--今天发现服务没有打开，本地http://localhost:8080居然访问不到-->
+	<dubbo:consumer check="false" timeout="300000" connections="10" />
+	<dubbo:provider timeout="300000" />
+	<dubbo:protocol name="dubbo" port="${dubbo.port}" dispatcher="all" threadpool="cached" threads="5000" />
+	<import resource="classpath*:/springbootdemo_dubbo_provider.xml" />
+	<import resource="classpath*:/springbootdemo_dubbo_customer.xml" />
+
+</beans>

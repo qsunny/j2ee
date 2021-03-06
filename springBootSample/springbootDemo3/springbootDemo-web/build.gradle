@@ -1,0 +1,42 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.4.RELEASE' apply true
+    id("io.spring.dependency-management") version "1.0.10.RELEASE"
+}
+group 'com.aaron'
+version '1.0.0-SNAPSHOT'
+
+configurations {
+    compile.exclude module: "spring-boot-starter-tomcat"
+}
+
+jar {
+    enabled = false
+}
+
+bootRun {
+    main = 'com.aaron.springbootDemo.web.SpringbootDemoApplication'
+    optimizedLaunch = false
+    //配合 devtools
+//    sourceResources sourceSets.main
+}
+
+/**
+ * https://docs.spring.io/spring-boot/docs/2.3.4.RELEASE/gradle-plugin/reference/html/#publishing-your-application
+ * gradle bootBuildImage --imageName=example.com/library/my-app:v1
+ */
+bootBuildImage {
+    builder = "mine/java-cnb-builder"
+    runImage = "mine/java-cnb-run"
+    environment = ["BP_JVM_VERSION" : "8.*"]
+    imageName = "example.com/library/${project.name}"
+}
+
+
+
+dependencies {
+    implementation project(':springbootDemo-core')
+    runtimeOnly("org.springframework.boot:spring-boot-starter-jetty")
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+}
+

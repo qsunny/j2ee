@@ -1,0 +1,13 @@
+bin
+.gradle
+.settings
+build
+.project
+.classpath
+.idea
+logs
+out
+*.iml
+*.log
+/gradlew
+/gradlew.bat

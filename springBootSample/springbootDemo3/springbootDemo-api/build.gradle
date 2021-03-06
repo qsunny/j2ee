@@ -1,0 +1,105 @@
+plugins {
+    id 'maven-publish'
+}
+
+group 'com.aaron'
+version '1.0.2-SNAPSHOT'
+
+dependencies {
+//    implementation('commons-beanutils:commons-beanutils:1.9.4') {
+//        exclude group: 'commons-collections', module: 'commons-collections'
+//    }
+//    implementation('commons-codec:commons-codec:1.9') {
+//        force = true
+//    }
+//    implementation('commons-codec:commons-codec') {
+//        version {
+//            strictly '1.9'
+//        }
+//    }
+    api('com.allchips:tools:1.0.40-SNAPSHOT'){
+        transitive=false
+    }
+    api ("com.allchips:base:1.2.0-SNAPSHOT"){
+        transitive=false
+    }
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'springbootDemo-api'
+            from components.java
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+            pom {
+                name = 'Aaron Library'
+                description = 'A concise description of my library'
+                url = 'http://www.example.com/library'
+                properties = [
+                        myProp: "value",
+                        "prop.with.dots": "anotherValue"
+                ]
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'aaron'
+                        name = 'Aaron.qiu'
+                        email = 'aaron.qiu@example.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://example.com/my-library.git'
+                    developerConnection = 'scm:git:ssh://example.com/my-library.git'
+                    url = 'http://example.com/my-library/'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            // change URLs to point to your repos, e.g. http://my.org/repo
+            def releasesRepoUrl = "http://120.25.156.197:8081/nexus/content/repositories/releases/"
+            def snapshotsRepoUrl = "http://120.25.156.197:8081/nexus/content/repositories/snapshots/"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            credentials {
+                username = 'deployment'
+                password = 'deploy@allchps-369'
+            }
+        }
+    }
+    sourceSets {
+        main {
+            java {
+                srcDirs = ['src/main/java']
+            }
+            //没错 我同时把resource指向了java目录 这样就可以收录java目录中的资源文件了
+            resources {
+                srcDirs = ['src/main/resources','src/main/java']
+            }
+        }
+    }
+}
+
+
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
+    }
+}
