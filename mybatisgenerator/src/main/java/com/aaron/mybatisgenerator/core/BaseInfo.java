@@ -1,7 +1,9 @@
 package com.aaron.mybatisgenerator.core;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
-import org.apache.commons.lang.StringUtils;
+
 
 public class BaseInfo
 {

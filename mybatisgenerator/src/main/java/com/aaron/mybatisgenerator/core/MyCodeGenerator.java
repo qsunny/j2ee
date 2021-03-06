@@ -16,7 +16,8 @@ import java.util.Map.Entry;
 
 import com.aaron.mybatisgenerator.util.*;
 import com.google.common.io.Resources;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
+
 
 public class MyCodeGenerator
 {
