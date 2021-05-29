@@ -1,0 +1,54 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.5.0'
+    id "io.spring.dependency-management" version "1.0.8.RELEASE"
+}
+
+group 'com.aaron'
+version '1.0.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    //https://maven.aliyun.com/mvn/guide
+    //使用Maven本地缓存
+    mavenLocal()
+    maven {
+        url "https://maven.aliyun.com/repository/public"
+    }
+    maven {
+        url "https://maven.aliyun.com/repository/spring"
+    }
+    maven {
+        url "https://maven.aliyun.com/repository/google"
+    }
+    maven {
+        url "https://maven.aliyun.com/repository/gradle-plugin"
+    }
+    maven {
+        url "https://maven.aliyun.com/repository/spring-plugin"
+    }
+    maven {
+        url "https://mirrors.huaweicloud.com/repository/maven/"
+        name = "华为开源镜像库"
+    }
+    maven {
+        url "https://repo1.maven.org/maven2"
+    }
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+    maven {
+        url "https://repository.jboss.org/nexus/content/groups/public/"
+        name = "jboss"
+    }
+    maven { url "https://jitpack.io" }
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.0'
+    implementation group: 'io.github.mouzt', name: 'bizlog-sdk', version: '1.0.4'
+    implementation 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+}
