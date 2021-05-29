@@ -49,6 +49,7 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web:2.5.0'
     implementation group: 'io.github.mouzt', name: 'bizlog-sdk', version: '1.0.4'
+    implementation group: 'cn.hutool', name: 'hutool-all', version: '5.6.6'
     implementation 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 }
