@@ -1,0 +1,11 @@
+bin
+.gradle
+.settings
+build
+.project
+.classpath
+.idea
+logs
+out
+*.iml
+LOG_PATH_IS_UNDEFINED

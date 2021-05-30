@@ -1,0 +1,15 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.0' apply true
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+}
+bootJar.enabled = false
+jar {
+    enabled = true
+}
+dependencies {
+    api project(':springbootDemoMp-common')
+    api 'mysql:mysql-connector-java:8.0.20'
+    api 'com.baomidou:mybatis-plus-boot-starter:3.3.2'
+    api("org.springframework.boot:spring-boot-starter-jdbc")
+    api("org.springframework.boot:spring-boot-starter-web")
+}

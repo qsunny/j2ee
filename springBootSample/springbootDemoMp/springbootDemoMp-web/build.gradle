@@ -1,0 +1,24 @@
+plugins {
+    id 'org.springframework.boot' version '2.5.0'
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+}
+
+group 'com.aaron'
+version '1.0.0-SNAPSHOT'
+
+bootJar {
+    enabled = true
+//    manifest {
+//        attributes 'Start-Class': 'com.aaron.springbootMpDemo.web.SpringbootDemoMpApp'
+//    }
+}
+
+jar {
+    enabled = false
+}
+
+dependencies {
+    api project(':springbootDemoMp-service')
+//    implementation('org.springframework.boot:spring-boot-starter-web')
+//    testImplementation("org.springframework.boot:spring-boot-starter-test")
+}

@@ -1,0 +1,8 @@
+rootProject.name = 'springbootDemoMp'
+includeFlat  'springbootDemoMp-beans'
+include 'springbootdemoMp-api'
+include 'springbootDemoMp-common'
+include 'springbootDemoMp-dao'
+include 'springbootDemoMp-service'
+include 'springbootDemoMp-web'
+

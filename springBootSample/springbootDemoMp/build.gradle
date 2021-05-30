@@ -1,0 +1,106 @@
+group 'com.aaron'
+version '1.0.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenLocal()
+        maven {
+            url "https://maven.aliyun.com/repository/public"
+        }
+        maven {
+            url "https://maven.aliyun.com/repository/spring"
+        }
+        maven {
+            url "https://maven.aliyun.com/repository/google"
+        }
+        maven {
+            url "https://maven.aliyun.com/repository/gradle-plugin"
+        }
+        maven {
+            url "https://maven.aliyun.com/repository/spring-plugin"
+        }
+    }
+    dependencies {
+    }
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    // JDK 8
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    // 全局属性设置
+    ext {
+        // java文件编码方式设置为utf-8
+        compileJava.options.encoding = 'UTF-8'
+        compileTestJava.options.encoding = 'UTF-8'
+        javadoc.options.encoding = 'utf-8'
+    }
+
+    repositories {
+        //https://maven.aliyun.com/mvn/guide
+        mavenLocal()
+        //使用Maven本地缓存
+        maven {
+            credentials {
+                username 'deployment'
+                password 'deployment123'
+            }
+            url "http://120.25.156.197:8081/nexus/content/groups/public/"
+        }
+        maven {
+            url "https://maven.aliyun.com/repository/public"
+        }
+        maven {
+            url "https://maven.aliyun.com/repository/spring"
+        }
+        maven {
+            url "https://maven.aliyun.com/repository/google"
+        }
+        maven {
+            url "https://maven.aliyun.com/repository/gradle-plugin"
+        }
+        maven {
+            url "https://maven.aliyun.com/repository/spring-plugin"
+        }
+        maven {
+            url "https://mirrors.huaweicloud.com/repository/maven/"
+            name = "华为开源镜像库"
+        }
+        maven {
+            url "https://repo1.maven.org/maven2"
+        }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+            url "https://repository.jboss.org/nexus/content/groups/public/"
+            name = "jboss"
+        }
+        maven { url "https://jitpack.io" }
+        mavenCentral()
+    }
+
+}
+
+subprojects {
+    apply plugin: 'idea'
+    apply plugin: 'java-library'
+
+    dependencies {
+//        testImplementation 'org.junit.platform:junit-platform-launcher:1.0.1'
+//        testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.0.1'
+//        testImplementation 'org.junit.vintage:junit-vintage-engine:4.12.1'
+    }
+
+    version '1.0.0-SNAPSHOT'
+
+    jar {
+        manifest.attributes provider: 'springbootDemoMp'
+    }
+
+}
+
