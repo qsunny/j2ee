@@ -24,7 +24,6 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * @author recharde.li@allchips.com
  * @version V1.0
  * @date 2020-08-20 11:00
  **/

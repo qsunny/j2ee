@@ -1,4 +1,4 @@
-package com.aaron.enums.springbootDemoMp;
+package com.aaron.enums.springbootDemoMp.common;
 
 
 import java.util.HashMap;

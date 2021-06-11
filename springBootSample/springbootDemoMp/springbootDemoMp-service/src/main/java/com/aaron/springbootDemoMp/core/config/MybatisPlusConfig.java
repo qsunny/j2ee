@@ -6,11 +6,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParser
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author Aaron.Qiu
  * @since 2021-05-30
  */
+@EnableTransactionManagement
 @Configuration
 //@MapperScan("com.aaron.springbootDemoMp.dao.*")
 public class MybatisPlusConfig {

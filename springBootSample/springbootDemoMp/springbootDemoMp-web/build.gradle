@@ -22,3 +22,16 @@ dependencies {
 //    implementation('org.springframework.boot:spring-boot-starter-web')
 //    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        //这样就可以收录java目录中的资源文件了
+        resources {
+            srcDirs = ['src/main/resources', 'src/main/java']
+        }
+
+    }
+}

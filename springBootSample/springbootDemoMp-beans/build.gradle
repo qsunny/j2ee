@@ -79,6 +79,9 @@ dependencies {
     api group: 'cn.hutool', name: 'hutool-all', version: '5.6.6'
     api 'org.projectlombok:lombok:1.18.20'
     api group: 'com.github.xiaoymin', name: 'knife4j-spring-boot-starter', version: '1.9.6'
+    api 'com.baomidou:mybatis-plus-boot-starter:3.3.2'
+    api "javax.servlet:javax.servlet-api:3.1.0"
+    api 'com.google.code.gson:gson:2.7'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     testImplementation 'org.junit.platform:junit-platform-launcher:1.0.0'
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.0.0"
