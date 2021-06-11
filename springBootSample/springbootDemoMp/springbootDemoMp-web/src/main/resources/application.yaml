@@ -1,3 +1,9 @@
 spring:
   profiles:
     active: dev
+
+api:
+  limit: 200
+
+logging:
+  config: classpath:demo-logback.xml

@@ -9,9 +9,10 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.spring.web.SpringfoxWebMvcConfiguration;
 
-@SpringBootApplication
+
 @EnableScheduling
 @ConditionalOnClass(SpringfoxWebMvcConfiguration.class)
+@SpringBootApplication(scanBasePackages={"com.aaron.springbootDemoMp"})
 public class SpringbootDemoMpApp extends SpringBootServletInitializer implements WebMvcConfigurer {
 
     @Override
@@ -24,3 +25,5 @@ public class SpringbootDemoMpApp extends SpringBootServletInitializer implements
         SpringApplication.run(SpringbootDemoMpApp.class, args);
     }
 }
+
+

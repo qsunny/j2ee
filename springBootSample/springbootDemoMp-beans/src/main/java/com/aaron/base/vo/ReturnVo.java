@@ -3,6 +3,7 @@ package com.aaron.base.vo;
 
 import com.aaron.base.BaseResp;
 import com.aaron.base.enums.BaseResponse;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  * @Since:2016-01-09
  * @Copyright:Copyright (c) 2021 ~ 2025 版权所有
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReturnVo<T> extends BaseResp {
 	
 	//响应编码
@@ -52,6 +54,13 @@ public class ReturnVo<T> extends BaseResp {
 		this.responseCode = BaseResponse.SUCCESS_RESULT.getResponseCode();
 		this.responseMsg = BaseResponse.SUCCESS_RESULT.getResponseMsgEn();
 	}
+
+	public ReturnVo(T vo) {
+		this.responseCode = BaseResponse.SUCCESS_RESULT.getResponseCode();
+		this.responseMsg = BaseResponse.SUCCESS_RESULT.getResponseMsgEn();
+		this.vo = vo;
+	}
+
 	public ReturnVo(Integer responseCode, T vo) {
 		this.responseCode = responseCode;
 		this.vo = vo;

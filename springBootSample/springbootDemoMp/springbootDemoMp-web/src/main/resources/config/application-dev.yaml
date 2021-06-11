@@ -5,7 +5,7 @@ spring:
     test-while-idle: true
     validation-query: SELECT 1
     max-wait: 10000
-    url: jdbc:mysql://192.168.200.102:3306/mydb?useUnicode=true&characterEncoding=UTF8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:mysql://192.168.200.123:3306/mydb?useUnicode=true&characterEncoding=UTF8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&useSSL=false
     jdbc-interceptors: ConnectionState;SlowQueryReport(threshold=0)
     max-idle: 10
     test-on-borrow: false
@@ -44,3 +44,21 @@ server:
 # 是否开启swagger
 swagger:
   show: true
+
+logging:
+  config: classpath:demo-logback.xml
+  file:
+    path: /data/logs/demo/dev
+
+
+log:
+  level: info
+
+
+#schedule job
+#cron表达式参考 http://cron.qqe2.com/
+#schedule:
+#  job:
+#    cleanErrorLog:
+#      cron: 0 0 0 7 * ?
+#      size: 1000
