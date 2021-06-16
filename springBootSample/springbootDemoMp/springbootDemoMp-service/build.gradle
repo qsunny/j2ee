@@ -9,6 +9,9 @@ jar {
 
 dependencies {
     api project(':springbootDemoMp-dao')
+//    api group: 'org.apache.dubbo', name: 'dubbo-spring-boot-starter', version: '2.7.12'
+    api group: 'org.apache.dubbo', name: 'dubbo-dependencies-zookeeper', version: '3.0.0.preview', ext: 'pom'
+    api group: 'org.apache.dubbo', name: 'dubbo', version: '3.0.0.preview'
 }
 
 
