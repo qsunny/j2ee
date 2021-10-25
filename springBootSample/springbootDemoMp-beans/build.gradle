@@ -48,7 +48,7 @@ allprojects {
         maven {
             credentials {
                 username 'deployment'
-                password 'aaron-6868'
+                password 'tulang-6868'
             }
             url "http://47.115.41.15:8081/repository/tulang-group/"
         }
@@ -64,7 +64,7 @@ version = '1.0.1-SNAPSHOT'
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'tulang-beans',
+        attributes 'Implementation-Title': 'springbootDemoMp-beans',
                 'Implementation-Version': version
     }
 }
@@ -117,7 +117,7 @@ publishing {
             }
             credentials {
                 username = 'deployment'
-                password = 'aaron-'
+                password = 'tulang-6868'
             }
         }
     }
