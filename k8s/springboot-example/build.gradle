@@ -1,0 +1,52 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.5.0'
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+}
+
+group 'com.aaron'
+version '1.0.0-SNAPSHOT'
+
+repositories {
+    //使用Maven本地缓存
+    mavenLocal()
+    maven {
+        url "https://maven.aliyun.com/repository/public"
+    }
+    maven {
+        url "https://mirrors.huaweicloud.com/repository/maven/"
+        name = "华为开源镜像库"
+    }
+    maven {
+        url "https://maven.aliyun.com/repository/gradle-plugin"
+    }
+    maven {
+        url "https://repo1.maven.org/maven2"
+    }
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+    maven {
+        url "https://repository.jboss.org/nexus/content/groups/public/"
+        name = "jboss"
+    }
+    maven { url "https://jitpack.io" }
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web:2.5.0'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+jar {
+    enabled = false
+
+}
+
+test {
+    useJUnitPlatform()
+}
