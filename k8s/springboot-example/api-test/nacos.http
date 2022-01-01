@@ -1,0 +1,8 @@
+### 通过调用 Nacos Open API 向 Nacos server 发布配置：dataId 为example，内容为useLocalCache=true
+GET http://yunlang.com:32300/config/get
+
+### # curl -X POST "http://127.0.0.1:8848/nacos/v1/cs/configs?dataId=example&group=DEFAULT_GROUP&content=useLocalCache=true"
+POST http://nacos.demo.com:32300/nacos/v1/cs/configs?dataId=example&group=DEFAULT_GROUP&content=useLocalCache=false
+
+###
+
