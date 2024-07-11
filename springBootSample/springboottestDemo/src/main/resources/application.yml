@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: local
+
+api:
+  limit: 200
+
+# 是否开启角色菜单操作权限校验
+role:
+  menu:
+    permission:
+      checkFlag: true
+
+
+
